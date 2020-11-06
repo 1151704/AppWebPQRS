@@ -1,0 +1,137 @@
+drop table if exists tipo_usuario cascade;
+create table tipo_usuario (
+	id serial NOT NULL,
+	descripcion varchar(50) NOT NULL,
+	habilitado bool NOT NULL,
+	CONSTRAINT tipo_usuario_pk PRIMARY KEY (id)
+);
+
+drop table if exists tipo_solicitud cascade;
+create table tipo_solicitud (
+	id serial NOT NULL,
+	descripcion varchar(255) NOT NULL,
+	habilitado bool NOT NULL,
+	CONSTRAINT tipo_solicitud_pk PRIMARY KEY (id)
+);
+
+drop table if exists motivo_solicitud cascade;
+create table motivo_solicitud (
+	id serial NOT NULL,
+    fk_tipo_solicitud int4 NOT NULL,
+	descripcion varchar(255) NOT NULL,
+	habilitar_entrada bool NOT NULL DEFAULT false,
+	habilitado bool NOT NULL DEFAULT true,
+	CONSTRAINT motivo_solicitud_pk PRIMARY KEY (id),
+	CONSTRAINT motivo_solicitud_fk_tipo_solicitud FOREIGN KEY (fk_tipo_solicitud) REFERENCES tipo_solicitud(id)
+);
+
+drop table if exists tipo_identificacion cascade;
+create table tipo_identificacion (
+	id serial NOT NULL,
+	abreviatura varchar(4) NOT NULL,
+	descripcion varchar(255) NOT NULL,
+	habilitado bool NOT NULL,
+	CONSTRAINT tipo_identificacion_pk PRIMARY KEY (id)
+);
+
+drop table if exists archivo cascade;
+create table archivo (
+	id serial NOT NULL,
+	nombre_por_usuario varchar(255) NOT NULL,
+	nombre_en_servidor varchar(255) NOT NULL,
+	fecha_registro timestamp NOT NULL,
+	CONSTRAINT archivo_pk PRIMARY KEY (id)
+);
+
+drop table if exists departamento cascade;
+create table departamento (
+	id serial NOT NULL,
+	codigo varchar(2) NOT NULL,
+	nombre varchar(60) NOT NULL,
+	CONSTRAINT departamento_pk PRIMARY KEY (id)
+);
+
+drop table if exists municipio cascade;
+create table municipio (
+	id serial NOT NULL,
+    fk_departamento int4 NOT NULL,
+	codigo varchar(2) NOT NULL,
+	nombre varchar(60) NOT NULL,
+	CONSTRAINT municipio_pk PRIMARY KEY (id),
+	CONSTRAINT municipio_fk_departamento FOREIGN KEY (fk_departamento) REFERENCES departamento(id)
+);
+
+drop table if exists usuario cascade;
+create table usuario (
+	id serial NOT NULL,
+    fk_tipo_usuario int4 NOT NULL,
+    fk_tipo_identificacion int4 NULL,
+    fk_municipio int4 NOT NULL,
+    codigo_interno int4 NULL,
+	identificacion varchar(15) NOT NULL,
+	primer_nombre varchar(15) NOT NULL,
+	segundo_nombre varchar(15) NULL,
+	primer_apellido varchar(15) NOT NULL,
+	segundo_apellido varchar(15) NULL,
+	telefono_fijo varchar(7) NULL,
+	celular varchar(15) NULL,
+	correo varchar(30) NOT NULL,
+	direccion varchar(30) NOT NULL,
+	barrio varchar(30) NOT NULL,
+	fecha_registro timestamp NOT NULL,
+	CONSTRAINT usuario_pk PRIMARY KEY (id),
+	CONSTRAINT usuario_uk_correo UNIQUE (correo),
+	CONSTRAINT usuario_fk_tipo_usuario FOREIGN KEY (fk_tipo_usuario) REFERENCES tipo_usuario(id),
+	CONSTRAINT usuario_fk_municipio FOREIGN KEY (fk_municipio) REFERENCES municipio(id),
+	CONSTRAINT usuario_fk_tipo_identificacion FOREIGN KEY (fk_tipo_identificacion) REFERENCES tipo_identificacion(id)
+);
+
+drop table if exists funcionario cascade;
+create table funcionario (
+	id serial NOT NULL,
+    fk_tipo_identificacion int4 NOT NULL,
+    codigo_interno int4 NOT NULL,
+	identificacion varchar(15) NOT NULL,
+	nombre_completo varchar(60) NOT NULL,
+	cargo varchar(35) NULL,
+	celular varchar(15) NULL,
+	correo varchar(30) NOT NULL,
+	contrasena varchar(30) NOT NULL,
+	es_administrador bool NOT NULL DEFAULT false,
+	fecha_registro timestamp NOT NULL,
+	fecha_modificacion timestamp NULL,
+	fecha_ultimo_ingreso timestamp NULL,
+	CONSTRAINT funcionario_pk PRIMARY KEY (id),
+	CONSTRAINT funcionario_uk_identificacion UNIQUE (fk_tipo_identificacion, identificacion),
+	CONSTRAINT funcionario_uk_correo UNIQUE (correo),
+	CONSTRAINT funcionario_fk_tipo_identificacion FOREIGN KEY (fk_tipo_identificacion) REFERENCES tipo_identificacion(id)
+);
+
+drop table if exists solicitud cascade;
+create table solicitud (
+	id serial NOT NULL,
+    fk_motivo_solicitud int4 NOT NULL,
+    fk_funcionario int4 NOT NULL,
+    fk_usuario int4 NOT NULL,
+    otro_motivo varchar(255) NULL,
+	descripcion varchar(2000) NOT NULL,
+	respuesta varchar(2000) NULL,
+    respondida bool NOT NULL DEFAULT false,
+	fecha_registro timestamp NOT NULL,
+	fecha_respuesta timestamp NULL,
+	CONSTRAINT solicitud_pk PRIMARY KEY (id),
+	CONSTRAINT solicitud_fk_motivo_solicitud FOREIGN KEY (fk_motivo_solicitud) REFERENCES motivo_solicitud(id),
+	CONSTRAINT solicitud_fk_funcionario FOREIGN KEY (fk_funcionario) REFERENCES funcionario(id),
+	CONSTRAINT solicitud_fk_usuario FOREIGN KEY (fk_usuario) REFERENCES usuario(id)
+);
+
+drop table if exists solicitud_archivos cascade;
+create table solicitud_archivos (
+	id serial NOT NULL,
+    fk_solicitud int4 NOT NULL,
+    fk_archivo int4 NOT NULL,
+	es_respuesta bool NOT NULL DEFAULT false,
+	CONSTRAINT solicitud_archivos_pk PRIMARY KEY (id),
+	CONSTRAINT solicitud_archivos_fk_solicitud FOREIGN KEY (fk_solicitud) REFERENCES solicitud(id),
+	CONSTRAINT solicitud_archivos_fk_archivo FOREIGN KEY (fk_archivo) REFERENCES archivo(id)
+);
