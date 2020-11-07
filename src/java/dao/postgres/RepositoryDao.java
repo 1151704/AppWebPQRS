@@ -1,6 +1,5 @@
 package dao.postgres;
 
-import dao.IGenericDao;
 import java.beans.Expression;
 import java.beans.Statement;
 import java.io.Serializable;
@@ -16,17 +15,24 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.lang.StringUtils;
 import util.ConexionBD;
+import dao.IRepositoryDao;
+import java.lang.reflect.ParameterizedType;
+import util.Column;
+import util.Table;
 
-public class GenericDao<T extends Serializable, ID> extends ConexionBD implements IGenericDao<T, ID> {
+public class RepositoryDao<T extends Serializable, ID> extends ConexionBD implements IRepositoryDao<T, ID> {
 
     private final String tableName;
     private final String idColumnName;
     private final Class<T> type;
 
-    public GenericDao(Class<T> type, String tableName, String idColumnName) {
-        this.tableName = tableName;
-        this.idColumnName = idColumnName;
-        this.type = type;
+    public RepositoryDao() {
+        this.type = (Class<T>) ((ParameterizedType)getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+        if (!type.isAnnotationPresent(Table.class)) {
+            throw new IllegalArgumentException(type.getName() + ". debe contener la anotación: " + Table.class.getName());
+        }
+        this.tableName = type.getAnnotation(Table.class).name();
+        this.idColumnName = type.getAnnotation(Table.class).nameFieldId();
     }
 
     public Class<T> getType() {
@@ -55,17 +61,17 @@ public class GenericDao<T extends Serializable, ID> extends ConexionBD implement
 
         int index = 0;
         ID identificador = null;
-        Field[] fields = new Field[fieldsInit.length-1];
+        Field[] fields = new Field[fieldsInit.length - 1];
         for (Field field : fieldsInit) {
-            name = field.getName();
+            name = getNameColumn(field);
             if (!name.equals(idColumnName)) {
                 fields[index++] = field;
             } else {
                 try {
-                    stmt = new Expression(entity, "get" + StringUtils.capitalize(name), new Object[]{});
+                    stmt = new Expression(entity, "get" + this.getFieldName(name), new Object[]{});
                     identificador = (ID) stmt.getValue();
                 } catch (Exception ex) {
-                    Logger.getLogger(GenericDao.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(RepositoryDao.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
             }
@@ -74,14 +80,14 @@ public class GenericDao<T extends Serializable, ID> extends ConexionBD implement
             name = fields[i].getName();
 
             if (!name.equals(idColumnName)) {
-                columnName += fields[i].getName();
+                columnName += getNameColumn(fields[i]);
                 values += '?';
 
                 try {
-                    stmt = new Expression(entity, "get" + StringUtils.capitalize(name), new Object[]{});
+                    stmt = new Expression(entity, "get" + this.getFieldName(name), new Object[]{});
                     parameters.add(stmt.getValue());
                 } catch (Exception ex) {
-                    Logger.getLogger(GenericDao.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(RepositoryDao.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
                 if (i + 1 < fields.length) {
@@ -156,7 +162,7 @@ public class GenericDao<T extends Serializable, ID> extends ConexionBD implement
                 for (Field field : item.getClass().getDeclaredFields()) {
                     name = field.getName();
 
-                    stmt = new Statement(item, "set" + StringUtils.capitalize(name), new Object[]{rs.getObject(name)});
+                    stmt = new Statement(item, "set" + this.getFieldName(name), new Object[]{rs.getObject(this.getNameColumn(field))});
                     stmt.execute();
 
                 }
@@ -164,11 +170,11 @@ public class GenericDao<T extends Serializable, ID> extends ConexionBD implement
                 list.add(item);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(GenericDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RepositoryDao.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalAccessException | InstantiationException ex) {
-            Logger.getLogger(GenericDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RepositoryDao.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
-            Logger.getLogger(GenericDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RepositoryDao.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 if (pst != null) {
@@ -181,7 +187,7 @@ public class GenericDao<T extends Serializable, ID> extends ConexionBD implement
                     con.close();
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(GenericDao.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(RepositoryDao.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return list;
@@ -224,9 +230,9 @@ public class GenericDao<T extends Serializable, ID> extends ConexionBD implement
                 list.add(item);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(GenericDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RepositoryDao.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
-            Logger.getLogger(GenericDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RepositoryDao.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 if (pst != null) {
@@ -239,7 +245,7 @@ public class GenericDao<T extends Serializable, ID> extends ConexionBD implement
                     con.close();
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(GenericDao.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(RepositoryDao.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return list;
@@ -264,9 +270,9 @@ public class GenericDao<T extends Serializable, ID> extends ConexionBD implement
 
             rows = pst.executeUpdate();
         } catch (SQLException ex) {
-            Logger.getLogger(GenericDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RepositoryDao.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
-            Logger.getLogger(GenericDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RepositoryDao.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 if (pst != null) {
@@ -276,11 +282,33 @@ public class GenericDao<T extends Serializable, ID> extends ConexionBD implement
                     con.close();
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(GenericDao.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(RepositoryDao.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return rows;
 
+    }
+
+    private String getFieldName(String name) {
+        return StringUtils.capitalize(name);
+    }
+
+    private String getNameColumn(Field field) {
+
+        if (field.isAnnotationPresent(Column.class)) {
+            Column column = field.getAnnotation(Column.class);
+            return column.name();
+        }
+
+        return field.getName();
+    }
+
+    public String getIdColumnName() {
+        return idColumnName;
+    }
+
+    public String getTableName() {
+        return tableName;
     }
 
 }

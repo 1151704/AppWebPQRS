@@ -1,12 +1,15 @@
 package dto;
 
 import java.io.Serializable;
+import util.Column;
 import util.Table;
 
-@Table(name = "departamento")
-public class DepartamentoDto implements Serializable {
+@Table(name = "municipio")
+public class MunicipioDto implements Serializable {
 
     private Integer id;
+    @Column(name = "fk_departamento")
+    private Integer fkDepartamento;
     private String codigo;
     private String nombre;
 
@@ -16,6 +19,14 @@ public class DepartamentoDto implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getFkDepartamento() {
+        return fkDepartamento;
+    }
+
+    public void setFkDepartamento(Integer fkDepartamento) {
+        this.fkDepartamento = fkDepartamento;
     }
 
     public String getCodigo() {
@@ -36,7 +47,7 @@ public class DepartamentoDto implements Serializable {
 
     @Override
     public String toString() {
-        return "DepartamentoDto{" + "id=" + id + ", codigo=" + codigo + ", nombre=" + nombre + '}';
+        return "MunicipioDto{" + "id=" + id + ", fkDepartamento=" + fkDepartamento + ", codigo=" + codigo + ", nombre=" + nombre + '}';
     }
 
 }

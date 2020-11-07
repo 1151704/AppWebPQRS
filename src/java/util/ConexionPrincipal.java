@@ -12,22 +12,14 @@ public class ConexionPrincipal {
     private final DataSource dataSource;
     private static final Parametros PARAMETROS = new Parametros();
 
-    public static final String PORT = PARAMETROS.getPORT();
-    public static final String HOST = PARAMETROS.getHOST();
-    public static final String DATABASE = PARAMETROS.getDATABASE();
-    public static final String USER = PARAMETROS.getUSER();
-    public static final String PASSWORD = PARAMETROS.getPASSWORD();
-    public static final String DRIVER = PARAMETROS.getDRIVER();
-    public static final String URL = PARAMETROS.getURL();
-
     private ConexionPrincipal() {
         basicDataSource = new BasicDataSource();
 
-        basicDataSource.setUsername(USER);
-        basicDataSource.setPassword(PASSWORD);
-        basicDataSource.setUrl(URL + "://" + HOST + ":" + PORT + "/" + DATABASE);
+        basicDataSource.setUsername(PARAMETROS.getUSER());
+        basicDataSource.setPassword(PARAMETROS.getPASSWORD());
+        basicDataSource.setUrl(PARAMETROS.getURL() + "://" + PARAMETROS.getHOST() + ":" + PARAMETROS.getPORT() + "/" + PARAMETROS.getDATABASE());
 
-        basicDataSource.setDriverClassName(DRIVER);
+        basicDataSource.setDriverClassName(PARAMETROS.getDRIVER());
         basicDataSource.setMaxTotal(-1);
         basicDataSource.setMaxIdle(-1);
         basicDataSource.setTimeBetweenEvictionRunsMillis(10000);
@@ -44,10 +36,6 @@ public class ConexionPrincipal {
             INSTANCE = new ConexionPrincipal();
         }
         return INSTANCE;
-    }
-
-    public String getDataBase() {
-        return DATABASE;
     }
 
     public Connection getConnection() throws SQLException {

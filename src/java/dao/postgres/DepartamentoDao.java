@@ -4,15 +4,8 @@ import dao.IDepartamentoDao;
 import dto.DepartamentoDto;
 import java.util.List;
 
-public class DepartamentoDao extends GenericDao<DepartamentoDto, Integer> implements IDepartamentoDao {
-
-    private static final String NAME_TABLE = "departamento";
-    private static final String NAME_COLUMN_ID = "id";
+public class DepartamentoDao extends RepositoryDao<DepartamentoDto, Integer> implements IDepartamentoDao {
     
-    public DepartamentoDao() {
-        super(DepartamentoDto.class, NAME_TABLE, NAME_COLUMN_ID);
-    }
-
     @Override
     public List<DepartamentoDto> listarDepartamentos() {
         return listAll();
@@ -20,7 +13,7 @@ public class DepartamentoDao extends GenericDao<DepartamentoDto, Integer> implem
 
     @Override
     public DepartamentoDto buscarPorCodigo(String codigo) {
-        String query = String.format("select * from %s where codigo = ? ", NAME_TABLE);
+        String query = String.format("select * from %s where codigo = ? ", getTableName());
         List<DepartamentoDto> listado = listDtoByQuery(query, codigo);
 
         if (listado.isEmpty()) {
@@ -32,11 +25,6 @@ public class DepartamentoDao extends GenericDao<DepartamentoDto, Integer> implem
     @Override
     public DepartamentoDto buscarPorId(Integer id) {
         return getById(id);
-    }
-
-    @Override
-    public DepartamentoDto guardar(DepartamentoDto departamento) {
-        return save(departamento);
     }
     
     

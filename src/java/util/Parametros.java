@@ -1,6 +1,8 @@
 package util;
 
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Parametros {
 
@@ -25,7 +27,8 @@ public class Parametros {
             PASSWORD = rb.getString("PASSWORD");
             DRIVER = rb.getString("DRIVER");
             URL = rb.getString("URL");
-        } catch (Exception e) {
+        } catch (Exception ex) {
+            Logger.getLogger(Parametros.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

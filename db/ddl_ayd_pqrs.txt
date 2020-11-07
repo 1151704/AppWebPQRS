@@ -55,7 +55,7 @@ drop table if exists municipio cascade;
 create table municipio (
 	id serial NOT NULL,
     fk_departamento int4 NOT NULL,
-	codigo varchar(2) NOT NULL,
+	codigo varchar(3) NOT NULL,
 	nombre varchar(60) NOT NULL,
 	CONSTRAINT municipio_pk PRIMARY KEY (id),
 	CONSTRAINT municipio_fk_departamento FOREIGN KEY (fk_departamento) REFERENCES departamento(id)

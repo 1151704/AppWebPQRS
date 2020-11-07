@@ -11,6 +11,4 @@ public interface IDepartamentoDao {
 
     public DepartamentoDto buscarPorCodigo(String codigo);
 
-    public DepartamentoDto guardar(DepartamentoDto departamento);
-
 }
