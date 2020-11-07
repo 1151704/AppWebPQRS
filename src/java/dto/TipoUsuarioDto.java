@@ -1,9 +1,10 @@
 package dto;
 
+import java.io.Serializable;
 import util.Table;
 
 @Table(name = "tipo_usuario")
-public class TipoUsuarioDto {
+public class TipoUsuarioDto implements Serializable {
 
     private Integer id;
     
