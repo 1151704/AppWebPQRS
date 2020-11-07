@@ -7,7 +7,9 @@ import util.Table;
 public class DepartamentoDto implements Serializable {
 
     private Integer id;
+    
     private String codigo;
+    
     private String nombre;
 
     public Integer getId() {

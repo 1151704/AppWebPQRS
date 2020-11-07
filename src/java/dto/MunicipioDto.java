@@ -8,9 +8,12 @@ import util.Table;
 public class MunicipioDto implements Serializable {
 
     private Integer id;
+    
     @Column(name = "fk_departamento")
     private Integer fkDepartamento;
+    
     private String codigo;
+    
     private String nombre;
 
     public Integer getId() {

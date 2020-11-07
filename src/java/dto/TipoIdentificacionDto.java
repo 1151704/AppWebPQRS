@@ -1,12 +1,17 @@
 package dto;
 
 import java.io.Serializable;
+import util.Table;
 
+@Table(name = "tipo_identificacion")
 public class TipoIdentificacionDto implements Serializable {
 
     private Integer id;
+    
     private String abreviatura;
+    
     private String descripcion;
+    
     private Boolean habilitado;
 
     public Integer getId() {

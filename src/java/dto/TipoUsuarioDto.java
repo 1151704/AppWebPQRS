@@ -1,10 +1,16 @@
 package dto;
 
+import util.Table;
+
+@Table(name = "tipo_usuario")
 public class TipoUsuarioDto {
 
     private Integer id;
+    
     private String abreviatura;
+    
     private String descripcion;
+    
     private Boolean habilitado;
 
     public Integer getId() {
