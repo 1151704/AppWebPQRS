@@ -1,10 +1,5 @@
-<%-- 
-    Document   : index
-    Created on : 06-nov-2020, 16:38:30
-    Author     : OMAR
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<jsp:useBean id="controlador" scope="session" class="service.postgres.Service" />
 <!DOCTYPE html>
 <html>
     <head>

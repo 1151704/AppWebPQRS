@@ -14,9 +14,6 @@ public class PruebasController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         
-        Service negocio = new Service();
-        
-
     }
 
 }

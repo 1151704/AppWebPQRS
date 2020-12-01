@@ -5,15 +5,15 @@
         <servlet-class>servlet.PruebasController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>loginController</servlet-name>
-        <servlet-class>servlet.loginController</servlet-class>
+        <servlet-name>LoginController</servlet-name>
+        <servlet-class>servlet.LoginController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>pruebas</servlet-name>
         <url-pattern>/pruebas</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>loginController</servlet-name>
+        <servlet-name>LoginController</servlet-name>
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
     <session-config>
