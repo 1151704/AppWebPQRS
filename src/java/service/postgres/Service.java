@@ -20,13 +20,15 @@ import dao.postgres.SolicitudArchivosDao;
 import dao.postgres.SolicitudDao;
 import dao.postgres.TipoIdentificacionDao;
 import dao.postgres.TipoSolicitudDao;
+import dao.postgres.TipoUsuarioDao;
+import dao.postgres.UsuarioDao;
 import java.io.Serializable;
 import service.IService;
 import util.Utilidades;
 
 public class Service implements IService, Serializable {
 
-    private Utilidades utilidades;
+    private final Utilidades utilidades;
 
     public Service() {
         this.utilidades = new Utilidades();
@@ -79,12 +81,12 @@ public class Service implements IService, Serializable {
 
     @Override
     public ITipoUsuarioDao serviceTipoUsuario() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new TipoUsuarioDao();
     }
 
     @Override
     public IUsuarioDao serviceUsuario() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new UsuarioDao();
     }
 
     public Utilidades getUtilidades() {

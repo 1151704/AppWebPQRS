@@ -5,6 +5,7 @@ import dao.postgres.TipoUsuarioDao;
 import java.io.Serializable;
 import java.util.Date;
 import util.Column;
+import util.ColumnTimestamp;
 import util.Table;
 
 @Table(name = "usuario")
@@ -50,6 +51,7 @@ public class UsuarioDto implements Serializable {
     private String barrio;
 
     @Column(name = "fecha_registro")
+    @ColumnTimestamp
     private Date fechaRegistro;
 
     public Integer getId() {
@@ -186,7 +188,7 @@ public class UsuarioDto implements Serializable {
     }
 
     public String getNombreCompleto() {
-        return this.primerNombre + " " + this.segundoNombre + " " + " " + this.primerApellido + this.segundoApellido;
+        return this.primerNombre + " " + this.segundoNombre + " " + this.primerApellido + " " + this.segundoApellido;
     }
 
     public TipoIdentificacionDto getTipoIdentificacion() {

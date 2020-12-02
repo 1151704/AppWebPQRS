@@ -8,19 +8,21 @@
     </head>
     <body class="text-center">
 
-        <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+        <div class="container d-flex h-100 p-3 mx-auto flex-column">
             <header class="masthead mb-auto">
                 <div class="inner">
                     <h3 class="masthead-brand">PQRS - UFPS</h3>
                     <nav class="nav nav-masthead justify-content-center">
                         <a class="nav-link" href="index.jsp">Inicio</a>
+                        <a class="nav-link" href="consultar.jsp">Consultar</a>
+                        <a class="nav-link" href="registrar.jsp">Registrar</a>
                         <a class="nav-link active" href="login.jsp">Iniciar sesión</a>
                     </nav>
                 </div>
             </header>
 
-            <main role="main" class="inner cover">
-                <div class="d-block container bg-white p-5 m-5 border border-primary rounded">
+            <main role="main" class="">
+                <div class="d-block container w-50 bg-white p-5 border border-primary rounded">
                     <form action="main/index.jsp" method="get">
                         <div class="form-group">
                             <label>Nombre de usuario</label>

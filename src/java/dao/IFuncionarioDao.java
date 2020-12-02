@@ -15,6 +15,8 @@ public interface IFuncionarioDao {
 
     public FuncionarioDto buscarPorIdentificacion(String identificacion);
     
+    public FuncionarioDto buscarDisponible();
+    
     public FuncionarioDto guardar(FuncionarioDto funcionario);
     
 }

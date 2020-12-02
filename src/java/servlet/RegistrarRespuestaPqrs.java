@@ -63,6 +63,7 @@ public class RegistrarRespuestaPqrs extends HttpServlet {
             
             if (idSolicitud == null || respuesta == null) {
                 resp.sendRedirect(req.getContextPath() + "/main/detalle_pqrs.jsp?id=" + idSolicitud);
+                return;
             }
             
             session = req.getSession();
@@ -72,6 +73,7 @@ public class RegistrarRespuestaPqrs extends HttpServlet {
             
             if (solicitud == null) {
                 resp.sendRedirect(req.getContextPath() + "/main/detalle_pqrs.jsp?id=" + idSolicitud);
+                return;
             }
             
             solicitud.setRespuesta(respuesta);
@@ -83,8 +85,6 @@ public class RegistrarRespuestaPqrs extends HttpServlet {
         } catch (FileUploadException e) {
             e.printStackTrace();
         }
-//        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/main/detalle_pqrs.jsp?id=" + idSolicitud);
-//        dispatcher.forward(req, resp);
 
     }
     

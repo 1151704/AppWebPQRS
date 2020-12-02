@@ -20,6 +20,10 @@
         <servlet-name>FuncionarioActualizar</servlet-name>
         <servlet-class>servlet.FuncionarioActualizar</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PqrsRegistar</servlet-name>
+        <servlet-class>servlet.PqrsRegistar</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>pruebas</servlet-name>
         <url-pattern>/pruebas</url-pattern>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>FuncionarioActualizar</servlet-name>
         <url-pattern>/actualizar-funcionario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PqrsRegistar</servlet-name>
+        <url-pattern>/registrar-pqrs</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
