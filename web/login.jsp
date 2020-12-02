@@ -3,44 +3,45 @@
 <html lang="es">
     <head>
         <%@include file="includes/head.jsp" %>
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/static/css/cover.css">
         <title>Login - PQRS</title>
     </head>
-    <body>
-        <div class="container">
-            <!-- Outer Row -->
-            <div class="row justify-content-center">
-                <div class="col-xl-10 col-lg-12 col-md-9">
-                    <div class="card o-hidden border-0 shadow-lg my-5">
-                        <div class="card-body p-0">
-                            <!-- Nested Row within Card Body -->
-                            <div class="row">
-                                <div class="col-lg-6 d-none d-lg-flex">
-                                    <img class="img-fluid" src="static/images/pqrs.jpg">
-                                </div>
-                                <div class="col-lg-6 d-flex justify-center align-items-center">
-                                    <div class="d-block p-5 col-12">
-                                        <div class="text-center">
-                                            <h1 class="h4 text-gray-900 mb-4 title-login">PQRS UFPS</h1>
-                                        </div>
-                                        <form class="user" action="main/index.jsp" method="get">
-                                            <div class="form-group">
-                                                <input type="text" class="form-control form-control-user" name="username" required autofocus placeholder="Identificación">
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="password" name="password" required class="form-control form-control-user" placeholder="Contraseña">
-                                            </div>
-                                            <button type="submit" class="btn btn-primary btn-user btn-block">Ingresar</button>
-                                        </form>
-                                        <div class="alert alert-danger mt-3">
-                                            Error: 
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    <body class="text-center">
+
+        <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+            <header class="masthead mb-auto">
+                <div class="inner">
+                    <h3 class="masthead-brand">PQRS - UFPS</h3>
+                    <nav class="nav nav-masthead justify-content-center">
+                        <a class="nav-link" href="index.jsp">Inicio</a>
+                        <a class="nav-link active" href="login.jsp">Iniciar sesión</a>
+                    </nav>
                 </div>
-            </div>
+            </header>
+
+            <main role="main" class="inner cover">
+                <div class="d-block container bg-white p-5 m-5 border border-primary rounded">
+                    <form action="main/index.jsp" method="get">
+                        <div class="form-group">
+                            <label>Nombre de usuario</label>
+                            <input type="text" class="form-control" name="username" required autofocus>
+                        </div>
+                        <div class="form-group">
+                            <label>Contraseña</label>
+                            <input type="password" class="form-control" name="password" required>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-success" >Iniciar</button>
+                        </div>
+                    </form>
+                </div>
+            </main>
+
+            <footer class="mastfoot mt-auto">
+                <div class="inner">
+                    <p>UFPS. Ingenieria de Sistemas. 2020.</p>
+                </div>
+            </footer>
         </div>
         <%@include file="includes/scripts.jsp" %>
     </body>
