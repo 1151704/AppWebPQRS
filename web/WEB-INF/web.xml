@@ -12,6 +12,10 @@
         <servlet-name>RegistrarRespuestaPqrs</servlet-name>
         <servlet-class>servlet.RegistrarRespuestaPqrs</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>FuncionarioRegistrar</servlet-name>
+        <servlet-class>servlet.FuncionarioRegistrar</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>pruebas</servlet-name>
         <url-pattern>/pruebas</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>RegistrarRespuestaPqrs</servlet-name>
         <url-pattern>/registrar-respuesta-pqrs</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FuncionarioRegistrar</servlet-name>
+        <url-pattern>/registrar-funcionario</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

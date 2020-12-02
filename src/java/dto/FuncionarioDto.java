@@ -1,8 +1,10 @@
 package dto;
 
+import dao.postgres.TipoIdentificacionDao;
 import java.io.Serializable;
 import java.util.Date;
 import util.Column;
+import util.ColumnTimestamp;
 import util.Table;
 
 @Table(name = "funcionario")
@@ -33,12 +35,15 @@ public class FuncionarioDto implements Serializable {
     private Boolean esAdministrador;
 
     @Column(name = "fecha_registro")
+    @ColumnTimestamp
     private Date fechaRegistro;
 
     @Column(name = "fecha_modificacion")
+    @ColumnTimestamp
     private Date fechaModificacion;
 
     @Column(name = "fecha_ultimo_ingreso")
+    @ColumnTimestamp
     private Date fechaUltimoIngreso;
 
     public Integer getId() {
@@ -148,6 +153,10 @@ public class FuncionarioDto implements Serializable {
     @Override
     public String toString() {
         return "FuncionarioDto{" + "id=" + id + ", fkTipoIdentificacion=" + fkTipoIdentificacion + ", codigoInterno=" + codigoInterno + ", identificacion=" + identificacion + ", nombreCompleto=" + nombreCompleto + ", cargo=" + cargo + ", celular=" + celular + ", correo=" + correo + ", contrasena=" + contrasena + ", esAdministrador=" + esAdministrador + ", fechaRegistro=" + fechaRegistro + ", fechaModificacion=" + fechaModificacion + ", fechaUltimoIngreso=" + fechaUltimoIngreso + '}';
+    }
+    
+    public TipoIdentificacionDto getTipoIdentificacion() {
+        return new TipoIdentificacionDao().buscarPorId(this.fkTipoIdentificacion);
     }
 
 }

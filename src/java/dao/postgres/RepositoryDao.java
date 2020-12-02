@@ -18,6 +18,7 @@ import util.ConexionBD;
 import dao.IRepositoryDao;
 import java.lang.reflect.ParameterizedType;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import util.Column;
 import util.ColumnDate;
@@ -89,10 +90,10 @@ public class RepositoryDao<T extends Serializable, ID> extends ConexionBD implem
 
                 try {
                     stmt = new Expression(entity, "get" + this.getFieldName(name), new Object[]{});
-                    if (isTimestamp(fields[i])) {
+                    if (isTimestamp(fields[i]) && stmt.getValue() != null) {
                         Date fecha = (Date) stmt.getValue();
                         parameters.add(new java.sql.Timestamp(fecha.getTime()));
-                    } else if (isDate(fields[i])) {
+                    } else if (isDate(fields[i]) && stmt.getValue() != null) {
                         Date fecha = (Date) stmt.getValue();
                         parameters.add(new java.sql.Date(fecha.getTime()));
                     } else {
@@ -182,10 +183,13 @@ public class RepositoryDao<T extends Serializable, ID> extends ConexionBD implem
                 list.add(item);
             }
         } catch (SQLException ex) {
+            System.out.println(query+" -> "+ Arrays.toString(args));
             Logger.getLogger(RepositoryDao.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalAccessException | InstantiationException ex) {
+            System.out.println(query+" -> "+ Arrays.toString(args));
             Logger.getLogger(RepositoryDao.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
+            System.out.println(query+" -> "+ Arrays.toString(args));
             Logger.getLogger(RepositoryDao.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
@@ -242,8 +246,10 @@ public class RepositoryDao<T extends Serializable, ID> extends ConexionBD implem
                 list.add(item);
             }
         } catch (SQLException ex) {
+            System.out.println(query+" -> "+ Arrays.toString(args));
             Logger.getLogger(RepositoryDao.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
+            System.out.println(query+" -> "+ Arrays.toString(args));
             Logger.getLogger(RepositoryDao.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
