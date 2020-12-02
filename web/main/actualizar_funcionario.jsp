@@ -8,7 +8,18 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:useBean id="controlador" scope="session" class="service.postgres.Service" />
 <%
-    List<TipoIdentificacionDto> tiposIds = controlador.serviceTipoIdentificacion().listarTodos();
+    Integer id_func = Utilidades.validateInputNumber(request.getParameter("id"));
+
+    if (id_func == null) {
+        out.print("<script>window.location.href = '" + request.getContextPath() + "/main/funcionarios.jsp';</script>");
+    }
+
+    FuncionarioDto funcionario = controlador.serviceFuncionario().buscarPorId(id_func);
+
+    if (funcionario == null) {
+        out.print("<script>window.location.href = '" + request.getContextPath() + "/main/funcionarios.jsp';</script>");
+    } else {
+        List<TipoIdentificacionDto> tiposIds = controlador.serviceTipoIdentificacion().listarTodos();
 %>
 <!doctype html>
 <html lang="es">
@@ -37,22 +48,23 @@
                                 <h6 class="m-0 font-weight-bold text-primary"><a class="btn btn-sm btn-outline-dark mr-1" href="funcionarios.jsp"><i class="fas fa-arrow-circle-left"></i> Volver</a>Registrar Funcionario</h6>
                             </div>
                             <div class="card-body">
-                                <form action="<%=request.getContextPath()%>/registrar-funcionario" method="post">
+                                <form action="<%=request.getContextPath()%>/actualizar-funcionario" method="post">
+                                    <input type="hidden" name="id" value="<%=funcionario.getId()%>" >
                                     <div class="form-group">
                                         <div class="form-row">
                                             <div class="col-lg-2 d-flex align-items-center">
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="es_administrador" name="es_administrador" >
+                                                    <input type="checkbox" <%=funcionario.getEsAdministrador() ? "checked" : ""%>  class="form-check-input" id="es_administrador" name="es_administrador" >
                                                     <label class="form-check-label" for="es_administrador">Es Administrador</label>
                                                 </div>
                                             </div>
                                             <div class="col-lg-3">
                                                 <div class="form-group">
                                                     <label>Tipo de Identificación</label>
-                                                    <select class="form-control" name="tipo_id" required="true">
+                                                    <select class="form-control" name="tipo_id" disabled="true">
                                                         <option value="">Seleccione ..</option>
                                                         <% for (TipoIdentificacionDto tipoId : tiposIds) {%>
-                                                        <option value="<%=tipoId.getId()%>"><%=tipoId.getDescripcion()%></option>
+                                                        <option value="<%=tipoId.getId()%>" selected="<%=tipoId.getId().equals(funcionario.getFkTipoIdentificacion())%>"><%=tipoId.getDescripcion()%></option>
                                                         <% }%>
                                                     </select>
                                                 </div>
@@ -60,7 +72,7 @@
                                             <div class="col-lg-7">
                                                 <div class="form-group">
                                                     <label>Identificación</label>
-                                                    <input type="text" class="form-control" name="identificacion" required="true">
+                                                    <input type="text" class="form-control" disabled="true" value="<%=funcionario.getIdentificacion()%>" name="identificacion" required="true">
                                                 </div>
                                             </div>
                                         </div>
@@ -68,13 +80,13 @@
                                             <div class="col-lg-4">
                                                 <div class="form-group">
                                                     <label>Código</label>
-                                                    <input type="number" class="form-control" name="codigo_interno" required="true">
+                                                    <input type="number" class="form-control" value="<%=funcionario.getCodigoInterno()%>" name="codigo_interno" required="true">
                                                 </div>
                                             </div>
                                             <div class="col-lg-8">
                                                 <div class="form-group">
                                                     <label>Nombre Completo</label>
-                                                    <input type="text" class="form-control" name="nombre_completo" required="true">
+                                                    <input type="text" class="form-control" value="<%=funcionario.getNombreCompleto()%>" name="nombre_completo" required="true">
                                                 </div>
                                             </div>
                                         </div>
@@ -82,19 +94,19 @@
                                             <div class="col-lg-4">
                                                 <div class="form-group">
                                                     <label>Celular</label>
-                                                    <input type="text" class="form-control" name="celular">
+                                                    <input type="text" class="form-control" value="<%=funcionario.getCelular()%>" name="celular">
                                                 </div>
                                             </div>
                                             <div class="col-lg-4">
                                                 <div class="form-group">
                                                     <label>Correo</label>
-                                                    <input type="text" class="form-control" name="correo">
+                                                    <input type="text" class="form-control" value="<%=funcionario.getCorreo()%>" name="correo">
                                                 </div>
                                             </div>
                                             <div class="col-lg-4">
                                                 <div class="form-group">
                                                     <label>Cargo</label>
-                                                    <input type="text" class="form-control" name="cargo">
+                                                    <input type="text" class="form-control" value="<%=funcionario.getCargo()%>" name="cargo">
                                                 </div>
                                             </div>
                                         </div>
@@ -122,3 +134,4 @@
         <%@include file="../includes/scripts.jsp" %>
     </body>
 </html>
+<% }%>

@@ -35,6 +35,12 @@ public class Utilidades implements Serializable {
 
     }
 
+    public static Boolean validateInputBoolean(String input) {
+
+        return input != null && !input.trim().isEmpty() ? input.equals("on"): false;
+
+    }
+
     public static Integer validateInputNumber(String input) {
 
         if (validateInputText(input) == null) {

@@ -43,6 +43,7 @@
                                             <tr>
                                                 <th>Acción</th>
                                                 <th>Identificación de funcionario</th>
+                                                <th>Código</th>
                                                 <th>Nombre</th>
                                                 <th>Cargo</th>
                                                 <th>Celular</th>
@@ -58,10 +59,11 @@
                                             <tr>
                                                 <td>
                                                     <div class="d-flex justify-content-center align-content-center">
-                                                        <a title="Detalle" class="btn btn-sm btn-outline-info m-1" href="detalle_pqrs.jsp?id=<%=usuario.getId() %>"  ><i class="fas fa-info-circle"></i></a>
+                                                        <a title="Detalle" class="btn btn-sm btn-outline-info m-1" href="actualizar_funcionario.jsp?id=<%=usuario.getId() %>"  ><i class="fas fa-info-circle"></i></a>
                                                     </div>
                                                 </td>
                                                 <td><%=usuario.getTipoIdentificacion().getAbreviatura() + " " + usuario.getIdentificacion()%></td>
+                                                <td><%=usuario.getCodigoInterno()%></td>
                                                 <td><%=usuario.getNombreCompleto()%></td>
                                                 <td><%=usuario.getCargo() %></td>
                                                 <td><%=usuario.getCelular() %></td>
