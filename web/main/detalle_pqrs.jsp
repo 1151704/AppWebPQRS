@@ -5,6 +5,7 @@
 <%@page import="util.Utilidades"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:useBean id="controlador" scope="session" class="service.postgres.Service" />
+<jsp:include page="../includes/verificarAcceso.jsp" flush="true"/>
 <%
     Integer id_pqr = Utilidades.validateInputNumber(request.getParameter("id"));
 

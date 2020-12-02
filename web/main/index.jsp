@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<jsp:include page="../includes/verificarAcceso.jsp" flush="true"/>
 <!doctype html>
 <html lang="es">
     <head>

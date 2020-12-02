@@ -19,4 +19,6 @@ public interface IFuncionarioDao {
     
     public FuncionarioDto guardar(FuncionarioDto funcionario);
     
+    public FuncionarioDto verificarAccesoCuenta(String username, String password);
+    
 }

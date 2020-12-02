@@ -24,6 +24,10 @@
         <servlet-name>PqrsRegistar</servlet-name>
         <servlet-class>servlet.PqrsRegistar</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CerrarSesion</servlet-name>
+        <servlet-class>servlet.CerrarSesion</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>pruebas</servlet-name>
         <url-pattern>/pruebas</url-pattern>
@@ -47,6 +51,10 @@
     <servlet-mapping>
         <servlet-name>PqrsRegistar</servlet-name>
         <url-pattern>/registrar-pqrs</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CerrarSesion</servlet-name>
+        <url-pattern>/cerrar-sesion</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

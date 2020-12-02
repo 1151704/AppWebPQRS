@@ -1,0 +1,77 @@
+.notifications {
+    position: fixed;
+    top: 70px;
+    right: 0;
+    z-index: 1100;
+    min-width: 400px;
+    max-width: 400px;
+}
+
+.notifications .notification {
+    margin: 5px;
+    border-radius: 5px;
+    color: #fff;
+    overflow: hidden;
+}
+
+.notifications .notification .title {
+    padding-left: 10px;
+    font-weight: bold;
+    position: relative;
+    /* font-size: 1.25em; */
+}
+
+.notifications .notification .title .notificacion-close {
+    position: absolute;
+    border: 0;
+    margin: 0;
+    top: 0;
+    right: 0;
+    padding: 0 0.3em;
+    background-color: rgba(0, 0, 0, .2);
+    color: white;
+    font-weight: bolder;
+}
+
+.notifications .notification .title {
+    background-color: #148ea1;    
+}
+
+.notifications .notification .message {
+    padding: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: #17a2b8;
+}
+
+.notifications .notification.noti-info .title {
+    background-color: #148ea1;
+}
+
+.notifications .notification.noti-info .message {
+    background-color: #17a2b8;
+}
+
+.notifications .notification.noti-success .title {
+    background-color: #23923d;
+}
+
+.notifications .notification.noti-success .message {
+    background-color: #28a745;
+}
+
+.notifications .notification.noti-warning .title {
+    background-color: #edb100;
+}
+
+.notifications .notification.noti-warning .message {
+    background-color: #ffc107;
+}
+
+.notifications .notification.noti-error .title {
+    background-color: #c32a38;
+}
+
+.notifications .notification.noti-error .message {
+    background-color: #d33342;
+}

@@ -1,6 +1,8 @@
 package servlet;
 
 import dto.FuncionarioDto;
+import dto.Mensaje;
+import dto.TipoMensaje;
 import java.io.IOException;
 import java.util.Date;
 import javax.servlet.ServletException;
@@ -9,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import service.postgres.Service;
+import util.Encriptador;
 import util.Utilidades;
 
 public class FuncionarioRegistrar extends HttpServlet {
@@ -18,6 +21,7 @@ public class FuncionarioRegistrar extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
+            session = req.getSession();
             req.setCharacterEncoding("UTF-8");
             resp.setCharacterEncoding("UTF-8");
 
@@ -32,10 +36,10 @@ public class FuncionarioRegistrar extends HttpServlet {
 
             if (idTipoIdentificacion == null || nombreCompleto == null || identificacion == null
                     || correo == null) {
-                resp.sendRedirect(req.getContextPath() + "/main/funcionarios.jsp");
+                session.setAttribute("mensaje", new Mensaje("Datos incompletos", "Debe ingresar todos los campos con *.", TipoMensaje.ERROR));
+                resp.sendRedirect(req.getContextPath() + "/main/registrar_funcionario.jsp");
                 return;
             }
-            session = req.getSession();
             Service controlador = (Service) session.getAttribute("controlador");
 
             FuncionarioDto funcionario = new FuncionarioDto();
@@ -43,22 +47,24 @@ public class FuncionarioRegistrar extends HttpServlet {
             funcionario.setCargo(cargo);
             funcionario.setCelular(celular);
             funcionario.setCodigoInterno(codigoInterno);
-            funcionario.setContrasena(identificacion);
             funcionario.setCorreo(correo);
             funcionario.setEsAdministrador(es_administrador);
             funcionario.setFechaRegistro(new Date());
             funcionario.setFkTipoIdentificacion(idTipoIdentificacion);
             funcionario.setIdentificacion(identificacion);
             funcionario.setNombreCompleto(nombreCompleto);
+            funcionario.setContrasena(Encriptador.encriptar(identificacion));
 
             funcionario = controlador.serviceFuncionario().guardar(funcionario);
             if (funcionario != null) {
+                session.setAttribute("mensaje", new Mensaje("Formulario registrado", "Se ha registrado exitosamente el funcionario.", TipoMensaje.SUCCESS));
                 resp.sendRedirect(req.getContextPath() + "/main/actualizar_funcionario.jsp?id=" + funcionario.getId());
                 return;
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+        session.setAttribute("mensaje", new Mensaje("Error", "Error al tratar de guardar el formulario.", TipoMensaje.ERROR));
         resp.sendRedirect(req.getContextPath() + "/main/funcionarios.jsp");
 
     }

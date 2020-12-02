@@ -73,4 +73,18 @@ public class FuncionarioDao extends RepositoryDao<FuncionarioDto, Integer> imple
         return listado.get(0);
     }
 
+    @Override
+    public FuncionarioDto verificarAccesoCuenta(String username, String password) {
+
+        String query = String.format("select * from %s \n"
+                + "where identificacion = ? and contrasena = ? limit 1", getTableName());
+
+        List<FuncionarioDto> listado = listDtoByQuery(query, username, password);
+
+        if (listado.isEmpty()) {
+            return null;
+        }
+        return listado.get(0);
+    }
+
 }

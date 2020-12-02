@@ -23,7 +23,7 @@
 
             <main role="main" class="">
                 <div class="d-block container w-50 bg-white p-5 border border-primary rounded">
-                    <form action="main/index.jsp" method="get">
+                    <form action="login" method="POST">
                         <div class="form-group">
                             <label>Nombre de usuario</label>
                             <input type="text" class="form-control" name="username" required autofocus>
@@ -33,7 +33,7 @@
                             <input type="password" class="form-control" name="password" required>
                         </div>
                         <div class="form-group">
-                            <button class="btn btn-success" >Iniciar</button>
+                            <button class="btn btn-success" type="submit" >Iniciar</button>
                         </div>
                     </form>
                 </div>

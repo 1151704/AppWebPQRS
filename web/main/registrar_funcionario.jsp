@@ -7,6 +7,7 @@
 <%@page import="util.Utilidades"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:useBean id="controlador" scope="session" class="service.postgres.Service" />
+<jsp:include page="../includes/verificarAcceso.jsp" flush="true"/>
 <%
     List<TipoIdentificacionDto> tiposIds = controlador.serviceTipoIdentificacion().listarTodos();
 %>
@@ -48,7 +49,7 @@
                                             </div>
                                             <div class="col-lg-3">
                                                 <div class="form-group">
-                                                    <label>Tipo de Identificación</label>
+                                                    <label>Tipo de Identificación *</label>
                                                     <select class="form-control" name="tipo_id" required="true">
                                                         <option value="">Seleccione ..</option>
                                                         <% for (TipoIdentificacionDto tipoId : tiposIds) {%>
@@ -59,7 +60,7 @@
                                             </div>
                                             <div class="col-lg-7">
                                                 <div class="form-group">
-                                                    <label>Identificación</label>
+                                                    <label>Identificación *</label>
                                                     <input type="text" class="form-control" name="identificacion" required="true">
                                                 </div>
                                             </div>
@@ -67,13 +68,13 @@
                                         <div class="form-row">
                                             <div class="col-lg-4">
                                                 <div class="form-group">
-                                                    <label>Código</label>
+                                                    <label>Código *</label>
                                                     <input type="number" class="form-control" name="codigo_interno" required="true">
                                                 </div>
                                             </div>
                                             <div class="col-lg-8">
                                                 <div class="form-group">
-                                                    <label>Nombre Completo</label>
+                                                    <label>Nombre Completo *</label>
                                                     <input type="text" class="form-control" name="nombre_completo" required="true">
                                                 </div>
                                             </div>
