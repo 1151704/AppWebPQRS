@@ -17,7 +17,11 @@ import org.apache.commons.lang.StringUtils;
 import util.ConexionBD;
 import dao.IRepositoryDao;
 import java.lang.reflect.ParameterizedType;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import util.Column;
+import util.ColumnDate;
+import util.ColumnTimestamp;
 import util.Table;
 
 public class RepositoryDao<T extends Serializable, ID> extends ConexionBD implements IRepositoryDao<T, ID> {
@@ -27,7 +31,7 @@ public class RepositoryDao<T extends Serializable, ID> extends ConexionBD implem
     private final Class<T> type;
 
     public RepositoryDao() {
-        this.type = (Class<T>) ((ParameterizedType)getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+        this.type = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
         if (!type.isAnnotationPresent(Table.class)) {
             throw new IllegalArgumentException(type.getName() + ". debe contener la anotación: " + Table.class.getName());
         }
@@ -85,7 +89,15 @@ public class RepositoryDao<T extends Serializable, ID> extends ConexionBD implem
 
                 try {
                     stmt = new Expression(entity, "get" + this.getFieldName(name), new Object[]{});
-                    parameters.add(stmt.getValue());
+                    if (isTimestamp(fields[i])) {
+                        Date fecha = (Date) stmt.getValue();
+                        parameters.add(new java.sql.Timestamp(fecha.getTime()));
+                    } else if (isDate(fields[i])) {
+                        Date fecha = (Date) stmt.getValue();
+                        parameters.add(new java.sql.Date(fecha.getTime()));
+                    } else {
+                        parameters.add(stmt.getValue());
+                    }
                 } catch (Exception ex) {
                     Logger.getLogger(RepositoryDao.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -301,6 +313,16 @@ public class RepositoryDao<T extends Serializable, ID> extends ConexionBD implem
         }
 
         return field.getName();
+    }
+
+    private Boolean isTimestamp(Field field) {
+
+        return field.isAnnotationPresent(ColumnTimestamp.class);
+    }
+
+    private Boolean isDate(Field field) {
+
+        return field.isAnnotationPresent(ColumnDate.class) || field.getType() == Date.class;
     }
 
     public String getIdColumnName() {

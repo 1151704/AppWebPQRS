@@ -1,11 +1,13 @@
 package dto;
 
+import dao.postgres.FuncionarioDao;
 import dao.postgres.MotivoSolicitudDao;
 import dao.postgres.UsuarioDao;
 import java.io.Serializable;
 import java.util.Date;
 import service.postgres.Service;
 import util.Column;
+import util.ColumnTimestamp;
 import util.Table;
 
 @Table(name = "solicitud")
@@ -32,9 +34,11 @@ public class SolicitudDto implements Serializable {
     private Boolean respondida;
 
     @Column(name = "fecha_registro")
+    @ColumnTimestamp
     private Date fechaRegistro;
 
     @Column(name = "fecha_respuesta")
+    @ColumnTimestamp
     private Date fechaRespuesta;
 
     public Integer getId() {
@@ -128,6 +132,10 @@ public class SolicitudDto implements Serializable {
 
     public MotivoSolicitudDto getMotivo() {
         return new MotivoSolicitudDao().buscarPorId(this.fkMotivoSolicitud);
+    }
+    
+    public FuncionarioDto getFuncionario() {
+        return new FuncionarioDao().buscarPorId(this.fkFuncionario);
     }
 
 }

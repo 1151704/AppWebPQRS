@@ -13,11 +13,12 @@ public class FuncionarioDto implements Serializable {
     @Column(name = "fk_tipo_identificacion")
     private Integer fkTipoIdentificacion;
 
-    private String codigoInterno;
+    @Column(name = "codigo_interno")
+    private Integer codigoInterno;
 
     private String identificacion;
 
-    @Column(name = "nombreCompleto")
+    @Column(name = "nombre_completo")
     private String nombreCompleto;
 
     private String cargo;
@@ -56,11 +57,11 @@ public class FuncionarioDto implements Serializable {
         this.fkTipoIdentificacion = fkTipoIdentificacion;
     }
 
-    public String getCodigoInterno() {
+    public Integer getCodigoInterno() {
         return codigoInterno;
     }
 
-    public void setCodigoInterno(String codigoInterno) {
+    public void setCodigoInterno(Integer codigoInterno) {
         this.codigoInterno = codigoInterno;
     }
 
@@ -146,7 +147,7 @@ public class FuncionarioDto implements Serializable {
 
     @Override
     public String toString() {
-        return "Funcionario{" + "id=" + id + ", fkTipoIdentificacion=" + fkTipoIdentificacion + ", codigoInterno=" + codigoInterno + ", identificacion=" + identificacion + ", nombreCompleto=" + nombreCompleto + ", cargo=" + cargo + ", celular=" + celular + ", correo=" + correo + ", contrasena=" + contrasena + ", esAdministrador=" + esAdministrador + ", fechaRegistro=" + fechaRegistro + ", fechaModificacion=" + fechaModificacion + ", fechaUltimoIngreso=" + fechaUltimoIngreso + '}';
+        return "FuncionarioDto{" + "id=" + id + ", fkTipoIdentificacion=" + fkTipoIdentificacion + ", codigoInterno=" + codigoInterno + ", identificacion=" + identificacion + ", nombreCompleto=" + nombreCompleto + ", cargo=" + cargo + ", celular=" + celular + ", correo=" + correo + ", contrasena=" + contrasena + ", esAdministrador=" + esAdministrador + ", fechaRegistro=" + fechaRegistro + ", fechaModificacion=" + fechaModificacion + ", fechaUltimoIngreso=" + fechaUltimoIngreso + '}';
     }
 
 }

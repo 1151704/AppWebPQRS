@@ -1,10 +1,11 @@
 package util;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Utilidades {
+public class Utilidades implements Serializable {
 
     public static String formatDate(Date fecha, String formato) {
         try {
