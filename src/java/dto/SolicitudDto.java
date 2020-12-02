@@ -1,7 +1,10 @@
 package dto;
 
+import dao.postgres.MotivoSolicitudDao;
+import dao.postgres.UsuarioDao;
 import java.io.Serializable;
 import java.util.Date;
+import service.postgres.Service;
 import util.Column;
 import util.Table;
 
@@ -117,6 +120,14 @@ public class SolicitudDto implements Serializable {
     @Override
     public String toString() {
         return "SolicitudDto{" + "id=" + id + ", fkMotivoSolicitud=" + fkMotivoSolicitud + ", fkFuncionario=" + fkFuncionario + ", fkUsuario=" + fkUsuario + ", otroMotivo=" + otroMotivo + ", descripcion=" + descripcion + ", respuesta=" + respuesta + ", respondida=" + respondida + ", fechaRegistro=" + fechaRegistro + ", fechaRespuesta=" + fechaRespuesta + '}';
+    }
+
+    public UsuarioDto getUsuario() {
+        return new UsuarioDao().buscarPorId(this.fkUsuario);
+    }
+
+    public MotivoSolicitudDto getMotivo() {
+        return new MotivoSolicitudDao().buscarPorId(this.fkMotivoSolicitud);
     }
 
 }

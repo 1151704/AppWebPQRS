@@ -7,11 +7,9 @@ import util.Table;
 public class TipoUsuarioDto implements Serializable {
 
     private Integer id;
-    
-    private String abreviatura;
-    
+
     private String descripcion;
-    
+
     private Boolean habilitado;
 
     public Integer getId() {
@@ -20,14 +18,6 @@ public class TipoUsuarioDto implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getAbreviatura() {
-        return abreviatura;
-    }
-
-    public void setAbreviatura(String abreviatura) {
-        this.abreviatura = abreviatura;
     }
 
     public String getDescripcion() {
@@ -48,7 +38,7 @@ public class TipoUsuarioDto implements Serializable {
 
     @Override
     public String toString() {
-        return "TipoUsuarioDto{" + "id=" + id + ", abreviatura=" + abreviatura + ", descripcion=" + descripcion + ", habilitado=" + habilitado + '}';
+        return "TipoUsuarioDto{" + "id=" + id + ", descripcion=" + descripcion + ", habilitado=" + habilitado + '}';
     }
 
 }

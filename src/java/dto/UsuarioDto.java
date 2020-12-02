@@ -1,11 +1,13 @@
 package dto;
 
+import dao.postgres.TipoIdentificacionDao;
+import dao.postgres.TipoUsuarioDao;
 import java.io.Serializable;
 import java.util.Date;
 import util.Column;
 import util.Table;
 
-@Table(name = "solicitud_archivos")
+@Table(name = "usuario")
 public class UsuarioDto implements Serializable {
 
     private Integer id;
@@ -20,7 +22,7 @@ public class UsuarioDto implements Serializable {
     private Integer fkMunicipio;
 
     @Column(name = "codigo_interno")
-    private String codigoInterno;
+    private Integer codigoInterno;
 
     private String identificacion;
 
@@ -82,11 +84,11 @@ public class UsuarioDto implements Serializable {
         this.fkMunicipio = fkMunicipio;
     }
 
-    public String getCodigoInterno() {
+    public Integer getCodigoInterno() {
         return codigoInterno;
     }
 
-    public void setCodigoInterno(String codigoInterno) {
+    public void setCodigoInterno(Integer codigoInterno) {
         this.codigoInterno = codigoInterno;
     }
 
@@ -181,6 +183,18 @@ public class UsuarioDto implements Serializable {
     @Override
     public String toString() {
         return "UsuarioDto{" + "id=" + id + ", fkTipoUsuario=" + fkTipoUsuario + ", fkTipoIdentificacion=" + fkTipoIdentificacion + ", fkMunicipio=" + fkMunicipio + ", codigoInterno=" + codigoInterno + ", identificacion=" + identificacion + ", primerNombre=" + primerNombre + ", primerApellido=" + primerApellido + ", segundoNombre=" + segundoNombre + ", segundoApellido=" + segundoApellido + ", telefonoFijo=" + telefonoFijo + ", celular=" + celular + ", correo=" + correo + ", direccion=" + direccion + ", barrio=" + barrio + ", fechaRegistro=" + fechaRegistro + '}';
+    }
+
+    public String getNombreCompleto() {
+        return this.primerNombre + " " + this.segundoNombre + " " + " " + this.primerApellido + this.segundoApellido;
+    }
+
+    public TipoIdentificacionDto getTipoIdentificacion() {
+        return new TipoIdentificacionDao().buscarPorId(this.fkTipoIdentificacion);
+    }
+
+    public TipoUsuarioDto getTipoUsuario() {
+        return new TipoUsuarioDao().buscarPorId(this.fkTipoUsuario);
     }
 
 }
