@@ -3,6 +3,8 @@ package util;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class EventsPDF extends PdfPageEventHelper {
 
@@ -104,7 +106,7 @@ public class EventsPDF extends PdfPageEventHelper {
             table.addCell(c_footer);
 
             // FOOTER
-            PdfPCell c_pagina = new PdfPCell(new Phrase("Develop Inc", font));
+            PdfPCell c_pagina = new PdfPCell(new Phrase("Develop Inc. Fecha generación: "+ new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new Date()), font));
             c_pagina.setVerticalAlignment(Element.ALIGN_MIDDLE);
             c_pagina.setHorizontalAlignment(Element.ALIGN_RIGHT);
             c_pagina.setBorder(Rectangle.BOTTOM);
