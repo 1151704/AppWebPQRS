@@ -7,7 +7,13 @@
 <jsp:useBean id="controlador" scope="session" class="service.postgres.Service" />
 <jsp:include page="../includes/verificarAcceso.jsp" flush="true"/>
 <%
-    List<SolicitudDto> solicitudes = controlador.serviceSolicitud().listarTodas();
+    FuncionarioDto funcionario = (FuncionarioDto) session.getAttribute("usuarioActual");
+    List<SolicitudDto> solicitudes;
+    if (funcionario.getEsAdministrador()) {
+        solicitudes = controlador.serviceSolicitud().listarTodas();
+    } else {
+        solicitudes = controlador.serviceSolicitud().buscarPorFuncionario(funcionario.getId());
+    }    
 %>
 <!doctype html>
 <html lang="es">
@@ -51,7 +57,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <%
+                                            <%                                                
                                                 for (SolicitudDto solicitud : solicitudes) {
                                                     UsuarioDto usuario = solicitud.getUsuario();
                                                     MotivoSolicitudDto motivo = solicitud.getMotivo();
@@ -62,7 +68,7 @@
                                                         <a title="Detalle" class="btn btn-sm btn-outline-info m-1" href="detalle_pqrs.jsp?id=<%=solicitud.getId()%>"  ><i class="fas fa-info-circle"></i></a>
                                                     </div>
                                                 </td>
-                                                <td><%=usuario != null ? usuario.getTipoIdentificacion().getAbreviatura() + " " + usuario.getIdentificacion(): ""%></td>
+                                                <td><%=usuario != null ? usuario.getTipoIdentificacion().getAbreviatura() + " " + usuario.getIdentificacion() : ""%></td>
                                                 <td><%=usuario != null ? usuario.getNombreCompleto() : ""%></td>
                                                 <td><%=motivo.getTipo().getDescripcion()%></td>
                                                 <td><%=motivo.getDescripcion()%></td>

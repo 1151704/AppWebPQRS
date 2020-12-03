@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import service.postgres.Service;
+import util.Encriptador;
 import util.Utilidades;
 
 public class FuncionarioActualizar extends HttpServlet {
@@ -32,9 +33,18 @@ public class FuncionarioActualizar extends HttpServlet {
             Integer codigoInterno = Utilidades.validateInputNumber(req.getParameter("codigo_interno"));
             Boolean es_administrador = Utilidades.validateInputBoolean(req.getParameter("es_administrador"));
 
+            Boolean change_password = Utilidades.validateInputBoolean(req.getParameter("change_password"));
+            String confirm_password = Utilidades.validateInputText(req.getParameter("confirm_password"));
+            String password = Utilidades.validateInputText(req.getParameter("password"));
+
             if (nombreCompleto == null || correo == null || id == null) {
                 resp.sendRedirect(req.getContextPath() + "/main/actualizar_funcionario.jsp?id=" + id);
                 session.setAttribute("mensaje", new Mensaje("Datos incompletos", "Debe ingresar todos los campos con *.", TipoMensaje.ERROR));
+                return;
+            }
+            if (change_password && (confirm_password == null || password == null || !password.equals(confirm_password))) {
+                resp.sendRedirect(req.getContextPath() + "/main/actualizar_funcionario.jsp?id=" + id);
+                session.setAttribute("mensaje", new Mensaje("Datos incompletos", "Debe ingresar la nueva contraseña", TipoMensaje.ERROR));
                 return;
             }
             Service controlador = (Service) session.getAttribute("controlador");
@@ -53,6 +63,10 @@ public class FuncionarioActualizar extends HttpServlet {
             funcionario.setEsAdministrador(es_administrador);
             funcionario.setFechaModificacion(new Date());
             funcionario.setNombreCompleto(nombreCompleto);
+
+            if (change_password) {
+                funcionario.setContrasena(Encriptador.encriptar(password));
+            }
 
             controlador.serviceFuncionario().guardar(funcionario);
             session.setAttribute("mensaje", new Mensaje("Formulario registrado", "Se ha registrado exitosamente el funcionario.", TipoMensaje.SUCCESS));

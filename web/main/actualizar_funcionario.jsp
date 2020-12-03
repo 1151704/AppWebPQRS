@@ -111,6 +111,26 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="form-row">                                            
+                                            <div class="col-lg-2 d-flex align-items-center">
+                                                <div class="form-check">
+                                                    <input type="checkbox"  class="form-check-input" id="change_password" name="change_password" >
+                                                    <label class="form-check-label" for="change_password">Cambiar contraseña</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-5">
+                                                <div class="form-group">
+                                                    <label>Contraseña nueva</label>
+                                                    <input type="password" class="form-control" value="" name="password">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-5">
+                                                <div class="form-group">
+                                                    <label>Confirmar contraseña</label>
+                                                    <input type="password" class="form-control" value="" name="confirm_password">
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <div class="form-row">

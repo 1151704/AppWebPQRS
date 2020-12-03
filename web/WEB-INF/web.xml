@@ -52,6 +52,10 @@
         <servlet-name>MotivoSolicitudActializar</servlet-name>
         <servlet-class>servlet.MotivoSolicitudActializar</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ReportePqrs</servlet-name>
+        <servlet-class>servlet.ReportePqrs</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>pruebas</servlet-name>
         <url-pattern>/pruebas</url-pattern>
@@ -103,6 +107,10 @@
     <servlet-mapping>
         <servlet-name>MotivoSolicitudActializar</servlet-name>
         <url-pattern>/actualizar-motivo-solicitud</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReportePqrs</servlet-name>
+        <url-pattern>/generar-reporte</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

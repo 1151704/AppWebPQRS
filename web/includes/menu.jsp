@@ -1,3 +1,8 @@
+<%@page import="dto.FuncionarioDto"%>
+<%
+    FuncionarioDto funcionarioMenu = (FuncionarioDto) session.getAttribute("usuarioActual");
+%>
+
 <!-- Sidebar -->
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
@@ -27,7 +32,8 @@
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>PQRS</span></a>
     </li>
-
+    
+    <% if (funcionarioMenu.getEsAdministrador()) { %>
     <li class="nav-item active">
         <a class="nav-link" href="<%=request.getContextPath()%>/main/funcionarios.jsp">
             <i class="fas fa-fw fa-user"></i>
@@ -45,6 +51,7 @@
             <i class="fas fa-users"></i>
             <span>Tipos de Usuarios</span></a>
     </li>
+    <% } %>
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
