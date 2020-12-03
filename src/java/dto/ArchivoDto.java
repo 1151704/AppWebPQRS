@@ -59,7 +59,7 @@ public class ArchivoDto implements Serializable {
 
     public String getUrlArchivo() {
         ResourceBundle rb = ResourceBundle.getBundle("resources.parametros");
-        return rb.getString("FTP_HOST") + "/" + this.nombreEnServidor;
+        return rb.getString("FTP_PUBLIC") + "/" + this.nombreEnServidor;
     }
 
 }
