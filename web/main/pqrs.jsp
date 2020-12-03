@@ -63,7 +63,7 @@
                                                     UsuarioDto usuario = solicitud.getUsuario();
                                                     MotivoSolicitudDto motivo = solicitud.getMotivo();
                                             %>
-                                            <tr>
+                                            <tr class="<%=solicitud.getRespondida()? "tr-select": "" %>">
                                                 <td>
                                                     <div class="d-flex justify-content-center align-content-center">
                                                         <a title="Detalle" class="btn btn-sm btn-outline-info m-1" href="detalle_pqrs.jsp?id=<%=solicitud.getId()%>"  ><i class="fas fa-info-circle"></i></a>

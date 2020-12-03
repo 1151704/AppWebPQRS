@@ -75,3 +75,7 @@
 .notifications .notification.noti-error .message {
     background-color: #d33342;
 }
+
+.tr-select {
+    background-color: rgba(211, 222, 253, .4)
+}

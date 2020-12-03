@@ -86,7 +86,7 @@ public class RegistrarRespuestaPqrs extends HttpServlet {
             solicitud.setRespondida(true);
             solicitud.setFechaRespuesta(new Date());
 
-//            controlador.serviceSolicitud().guardar(solicitud);
+            controlador.serviceSolicitud().guardar(solicitud);
             if (archivo != null) {
                 ArchivoDto archivoNew = new ArchivoSubir().subirServidor(archivo);
 

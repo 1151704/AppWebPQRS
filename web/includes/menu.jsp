@@ -9,7 +9,7 @@
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<%=request.getContextPath()%>/main/index.jsp">
         <div class="sidebar-brand-icon rotate-n-15">
-            <i class="fas fa-laugh-wink"></i>
+            <i class="fas fa-archive"></i>
         </div>
         <div class="sidebar-brand-text mx-3">PQRS-UFPS</div>
     </a>
