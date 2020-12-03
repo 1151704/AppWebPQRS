@@ -28,6 +28,22 @@
         <servlet-name>CerrarSesion</servlet-name>
         <servlet-class>servlet.CerrarSesion</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RegistrarTipoSolicitud</servlet-name>
+        <servlet-class>servlet.RegistrarTipoSolicitud</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ActualizarTipoSolicitud</servlet-name>
+        <servlet-class>servlet.ActualizarTipoSolicitud</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TipoUsuarioRegistrar</servlet-name>
+        <servlet-class>servlet.TipoUsuarioRegistrar</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TipoUsuarioActualizar</servlet-name>
+        <servlet-class>servlet.TipoUsuarioActualizar</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>pruebas</servlet-name>
         <url-pattern>/pruebas</url-pattern>
@@ -55,6 +71,22 @@
     <servlet-mapping>
         <servlet-name>CerrarSesion</servlet-name>
         <url-pattern>/cerrar-sesion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegistrarTipoSolicitud</servlet-name>
+        <url-pattern>/registrar-tipo-solicitud</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ActualizarTipoSolicitud</servlet-name>
+        <url-pattern>/actualizar-tipo-solicitud</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TipoUsuarioRegistrar</servlet-name>
+        <url-pattern>/registrar-tipo-usuario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TipoUsuarioActualizar</servlet-name>
+        <url-pattern>/actualizar-tipo-usuario</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

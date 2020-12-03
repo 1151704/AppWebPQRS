@@ -21,4 +21,11 @@ public class TipoUsuarioDao extends RepositoryDao<TipoUsuarioDto, Integer> imple
         return listAll();
     }
 
+    @Override
+    public List<TipoUsuarioDto> listarActivos() {
+        String query = String.format("select * from %s where habilitado = ?", getTableName());
+
+        return listDtoByQuery(query, true);
+    }
+
 }

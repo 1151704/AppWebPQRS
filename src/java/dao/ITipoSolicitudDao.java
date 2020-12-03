@@ -11,4 +11,6 @@ public interface ITipoSolicitudDao {
     
     public List<TipoSolicitudDto> listarTodos();
     
+    public List<TipoSolicitudDto> listarActivos();
+    
 }

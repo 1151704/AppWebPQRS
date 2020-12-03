@@ -5,8 +5,8 @@
 <%
 
     List<TipoIdentificacionDto> tiposIds = controlador.serviceTipoIdentificacion().listarTodos();
-    List<TipoUsuarioDto> tiposUsuarios = controlador.serviceTipoUsuario().listarTodos();
-    List<TipoSolicitudDto> tiposSolicitud = controlador.serviceTipoSolicitud().listarTodos();
+    List<TipoUsuarioDto> tiposUsuarios = controlador.serviceTipoUsuario().listarActivos();
+    List<TipoSolicitudDto> tiposSolicitud = controlador.serviceTipoSolicitud().listarActivos();
 
 %>
 <!doctype html>

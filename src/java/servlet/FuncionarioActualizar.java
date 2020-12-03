@@ -33,7 +33,7 @@ public class FuncionarioActualizar extends HttpServlet {
             Boolean es_administrador = Utilidades.validateInputBoolean(req.getParameter("es_administrador"));
 
             if (nombreCompleto == null || correo == null || id == null) {
-                resp.sendRedirect(req.getContextPath() + "/main/funcionarios.jsp");
+                resp.sendRedirect(req.getContextPath() + "/main/actualizar_funcionario.jsp?id=" + id);
                 session.setAttribute("mensaje", new Mensaje("Datos incompletos", "Debe ingresar todos los campos con *.", TipoMensaje.ERROR));
                 return;
             }

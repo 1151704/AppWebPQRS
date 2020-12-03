@@ -21,4 +21,11 @@ public class TipoSolicitudDao extends RepositoryDao<TipoSolicitudDto, Integer> i
         return listAll();
     }
 
+    @Override
+    public List<TipoSolicitudDto> listarActivos() {
+        String query = String.format("select * from %s where habilitado = ?", getTableName());
+
+        return listDtoByQuery(query, true);
+    }
+
 }

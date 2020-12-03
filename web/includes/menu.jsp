@@ -33,6 +33,18 @@
             <i class="fas fa-fw fa-user"></i>
             <span>Funcionarios</span></a>
     </li>
+    
+    <li class="nav-item active">
+        <a class="nav-link" href="<%=request.getContextPath()%>/main/tipos_solicitudes.jsp">
+            <i class="fas fa-fw fa-user"></i>
+            <span>Tipos de Solicitudes</span></a>
+    </li>
+    
+    <li class="nav-item active">
+        <a class="nav-link" href="<%=request.getContextPath()%>/main/tipos_usuarios.jsp">
+            <i class="fas fa-fw fa-user"></i>
+            <span>Tipos de Usuarios</span></a>
+    </li>
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">

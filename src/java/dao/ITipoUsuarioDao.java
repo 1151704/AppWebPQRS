@@ -11,4 +11,6 @@ public interface ITipoUsuarioDao {
     
     public List<TipoUsuarioDto> listarTodos();
     
+    public List<TipoUsuarioDto> listarActivos();
+    
 }
