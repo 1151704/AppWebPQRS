@@ -5,14 +5,14 @@ import java.sql.SQLException;
 import javax.sql.DataSource;
 import org.apache.commons.dbcp2.BasicDataSource;
 
-public class ConexionPrincipal {
+public class ConexionDbAdmin {
 
-    private static ConexionPrincipal INSTANCE;
+    private static ConexionDbAdmin INSTANCE;
     private final BasicDataSource basicDataSource;
     private final DataSource dataSource;
     private static final Parametros PARAMETROS = new Parametros();
 
-    private ConexionPrincipal() {
+    private ConexionDbAdmin() {
         basicDataSource = new BasicDataSource();
 
         basicDataSource.setUsername(PARAMETROS.getUSER());
@@ -31,9 +31,9 @@ public class ConexionPrincipal {
         dataSource = basicDataSource;
     }
 
-    public static ConexionPrincipal getInstance() {
+    public static ConexionDbAdmin getInstance() {
         if (INSTANCE == null) {
-            INSTANCE = new ConexionPrincipal();
+            INSTANCE = new ConexionDbAdmin();
         }
         return INSTANCE;
     }

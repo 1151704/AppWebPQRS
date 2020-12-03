@@ -2,6 +2,7 @@ package dto;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.ResourceBundle;
 import util.Column;
 import util.Table;
 
@@ -54,6 +55,11 @@ public class ArchivoDto implements Serializable {
     @Override
     public String toString() {
         return "ArchivoDto{" + "id=" + id + ", nombrePorUsuario=" + nombrePorUsuario + ", nombreEnServidor=" + nombreEnServidor + ", fechaRegistro=" + fechaRegistro + '}';
+    }
+
+    public String getUrlArchivo() {
+        ResourceBundle rb = ResourceBundle.getBundle("resources.parametros");
+        return rb.getString("FTP_HOST") + "/" + this.nombreEnServidor;
     }
 
 }

@@ -8,12 +8,6 @@ public class Pruebas {
 
     public void test1() {
 
-        FTPClient ftpClient;
-        try {
-            ftpClient = ConexionFTP.ConexionFTP();
-        } catch (Exception ex) {
-            Logger.getLogger(Pruebas.class.getName()).log(Level.SEVERE, null, ex);
-        }
 
     }
 

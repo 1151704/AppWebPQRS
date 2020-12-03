@@ -8,15 +8,14 @@ import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPReply;
 
-public class ConexionFTP implements java.io.Serializable {
+public class ConexionFtpAdmin implements java.io.Serializable {
 
-    public static FTPClient ConexionFTP() {
-        FTPClient clienteFTP = null;
+    private static ConexionFtpAdmin INSTANCE;
+    private FTPClient clienteFTP;
 
+    private ConexionFtpAdmin() {
         try {
-            ResourceBundle rb;
-            String ARCHIVO_CONFIGURACION = "resources.parametros";
-            rb = ResourceBundle.getBundle(ARCHIVO_CONFIGURACION);
+            ResourceBundle rb = ResourceBundle.getBundle("resources.parametros");
 
             clienteFTP = new FTPClient();
 
@@ -39,14 +38,23 @@ public class ConexionFTP implements java.io.Serializable {
                 }
                 clienteFTP.setFileType(FTP.BINARY_FILE_TYPE);
                 clienteFTP.enterLocalPassiveMode();
-
-            } else {
-                clienteFTP = null;
             }
 
         } catch (IOException ex) {
-            Logger.getLogger(ConexionFTP.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConexionFtpAdmin.class.getName()).log(Level.SEVERE, null, ex);
+            clienteFTP = null;
         }
+    }
+
+    public static ConexionFtpAdmin getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new ConexionFtpAdmin();
+        }
+        return INSTANCE;
+    }
+
+    public FTPClient getClienteFTP() {
         return clienteFTP;
     }
+
 }

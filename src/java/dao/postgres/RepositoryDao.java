@@ -14,10 +14,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.lang.StringUtils;
-import util.ConexionBD;
+import util.ConexionDb;
 import dao.IRepositoryDao;
 import java.lang.reflect.ParameterizedType;
-import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import util.Column;
@@ -25,7 +24,7 @@ import util.ColumnDate;
 import util.ColumnTimestamp;
 import util.Table;
 
-public class RepositoryDao<T extends Serializable, ID> extends ConexionBD implements IRepositoryDao<T, ID> {
+public class RepositoryDao<T extends Serializable, ID> extends ConexionDb implements IRepositoryDao<T, ID> {
 
     private final String tableName;
     private final String idColumnName;
@@ -159,7 +158,7 @@ public class RepositoryDao<T extends Serializable, ID> extends ConexionBD implem
         Connection con = null;
 
         try {
-            con = conPrincipal.getConnection();
+            con = conDb.getConnection();
             pst = con.prepareStatement(query);
 
             for (int i = 0; i < args.length; i++) {
@@ -183,13 +182,13 @@ public class RepositoryDao<T extends Serializable, ID> extends ConexionBD implem
                 list.add(item);
             }
         } catch (SQLException ex) {
-            System.out.println(query+" -> "+ Arrays.toString(args));
+            System.out.println(query + " -> " + Arrays.toString(args));
             Logger.getLogger(RepositoryDao.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalAccessException | InstantiationException ex) {
-            System.out.println(query+" -> "+ Arrays.toString(args));
+            System.out.println(query + " -> " + Arrays.toString(args));
             Logger.getLogger(RepositoryDao.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
-            System.out.println(query+" -> "+ Arrays.toString(args));
+            System.out.println(query + " -> " + Arrays.toString(args));
             Logger.getLogger(RepositoryDao.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
@@ -220,7 +219,7 @@ public class RepositoryDao<T extends Serializable, ID> extends ConexionBD implem
         Connection con = null;
 
         try {
-            con = conPrincipal.getConnection();
+            con = conDb.getConnection();
             pst = con.prepareStatement(query);
 
             for (int i = 0; i < args.length; i++) {
@@ -246,10 +245,10 @@ public class RepositoryDao<T extends Serializable, ID> extends ConexionBD implem
                 list.add(item);
             }
         } catch (SQLException ex) {
-            System.out.println(query+" -> "+ Arrays.toString(args));
+            System.out.println(query + " -> " + Arrays.toString(args));
             Logger.getLogger(RepositoryDao.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
-            System.out.println(query+" -> "+ Arrays.toString(args));
+            System.out.println(query + " -> " + Arrays.toString(args));
             Logger.getLogger(RepositoryDao.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
@@ -279,7 +278,7 @@ public class RepositoryDao<T extends Serializable, ID> extends ConexionBD implem
         Connection con = null;
 
         try {
-            con = conPrincipal.getConnection();
+            con = conDb.getConnection();
             pst = con.prepareStatement(query);
 
             for (int i = 0; i < args.length; i++) {

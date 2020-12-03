@@ -1,5 +1,6 @@
 package dto;
 
+import dao.postgres.ArchivoDao;
 import java.io.Serializable;
 import util.Column;
 import util.Table;
@@ -53,6 +54,10 @@ public class SolicitudArchivosDto implements Serializable {
     @Override
     public String toString() {
         return "SolicitudArchivosDto{" + "id=" + id + ", fkSolicitud=" + fkSolicitud + ", fkArchivo=" + fkArchivo + ", esRespuesta=" + esRespuesta + '}';
+    }
+
+    public ArchivoDto getArchivo() {
+        return new ArchivoDao().buscarPorId(this.fkArchivo);
     }
 
 }

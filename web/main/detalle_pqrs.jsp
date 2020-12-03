@@ -1,3 +1,6 @@
+<%@page import="dto.ArchivoDto"%>
+<%@page import="dto.SolicitudArchivosDto"%>
+<%@page import="java.util.List"%>
 <%@page import="dto.FuncionarioDto"%>
 <%@page import="dto.MotivoSolicitudDto"%>
 <%@page import="dto.UsuarioDto"%>
@@ -21,6 +24,8 @@
         UsuarioDto usuario = solicitud.getUsuario();
         MotivoSolicitudDto motivo = solicitud.getMotivo();
         FuncionarioDto funcionario = solicitud.getFuncionario();
+        List<SolicitudArchivosDto> archivosRta = controlador.serviceSolicitudArchivos().listarPorSolicitudRespuesta(id_pqr, true);
+        List<SolicitudArchivosDto> archivosEnv = controlador.serviceSolicitudArchivos().listarPorSolicitudRespuesta(id_pqr, false);
 %>
 <!doctype html>
 <html lang="es">
@@ -162,14 +167,17 @@
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label>Fecha de solicitud</label>
-                                                <input type="text" value="<%=Utilidades.formatDate(solicitud.getFechaRegistro(), "yyyy-MM-dd") %>" class="form-control" disabled="true" readonly="true">
+                                                <input type="text" value="<%=Utilidades.formatDate(solicitud.getFechaRegistro(), "yyyy-MM-dd")%>" class="form-control" disabled="true" readonly="true">
                                             </div>
                                         </div>
-                                        <div class="col-lg-6">
+                                        <% for (SolicitudArchivosDto a : archivosEnv) { %>
+                                        <% ArchivoDto archivo = a.getArchivo();%>
+                                        <div class="col-lg-3 d-flex justify-content-end align-items-end">
                                             <div class="form-group">
-                                                <a href="#" class="btn btn-sm btn-outline-primary">Documento adjunto <i class="fas fa-download"></i></a>
+                                                <a href="<%=archivo.getUrlArchivo()%>" download="<%=archivo.getNombrePorUsuario()%>" class="btn btn-sm btn-outline-primary">Documento adjunto <i class="fas fa-download"></i></a>
                                             </div>
                                         </div>
+                                        <% } %>
                                     </div>
                                 </div>
                             </div>
@@ -185,14 +193,17 @@
                                     <div class="col-lg-3">
                                         <div class="form-group">
                                             <label>Fecha de Respuesta</label>
-                                            <input type="text" value="<%=Utilidades.formatDate(solicitud.getFechaRespuesta(), "yyyy-MM-dd HH:mm") %>" class="form-control" disabled="true" readonly="true">
+                                            <input type="text" value="<%=Utilidades.formatDate(solicitud.getFechaRespuesta(), "yyyy-MM-dd HH:mm")%>" class="form-control" disabled="true" readonly="true">
                                         </div>
                                     </div>
+                                    <% for (SolicitudArchivosDto a : archivosRta) { %>
+                                    <% ArchivoDto archivo = a.getArchivo();%>
                                     <div class="col-lg-3 d-flex justify-content-end align-items-end">
                                         <div class="form-group">
-                                            <a href="#" class="btn btn-sm btn-outline-primary">Soporte <i class="fas fa-download"></i></a>
+                                            <a href="<%=archivo.getUrlArchivo()%>" download="<%=archivo.getNombrePorUsuario()%>" class="btn btn-sm btn-outline-primary">Soporte <i class="fas fa-download"></i></a>
                                         </div>
                                     </div>
+                                    <% }%>
 
                                 </div>
                                 <div class="form-row">   

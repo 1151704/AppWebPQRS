@@ -1,10 +1,11 @@
 package servlet;
 
+import dto.ArchivoDto;
 import dto.Mensaje;
+import dto.SolicitudArchivosDto;
 import dto.SolicitudDto;
 import dto.TipoMensaje;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -21,6 +22,7 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import service.postgres.Service;
+import util.ArchivoSubir;
 import util.Utilidades;
 
 public class RegistrarRespuestaPqrs extends HttpServlet {
@@ -49,7 +51,7 @@ public class RegistrarRespuestaPqrs extends HttpServlet {
 
             Integer idSolicitud = null;
             String respuesta = null;
-            InputStream archivo = null;
+            FileItem archivo = null;
 
             while (it.hasNext()) {
                 FileItem fileItem = it.next();
@@ -61,7 +63,7 @@ public class RegistrarRespuestaPqrs extends HttpServlet {
                         respuesta = Utilidades.validateInputText(fileItem.getString());
                     }
                 } else {
-                    archivo = fileItem.getInputStream();
+                    archivo = fileItem;
                 }
             }
 
@@ -85,9 +87,21 @@ public class RegistrarRespuestaPqrs extends HttpServlet {
             solicitud.setFechaRespuesta(new Date());
 
             controlador.serviceSolicitud().guardar(solicitud);
+            if (archivo != null) {
+                ArchivoDto archivoNew = new ArchivoSubir().subirServidor(archivo);
+
+                if (archivoNew != null) {
+                    SolicitudArchivosDto solicitudArchivo = new SolicitudArchivosDto();
+                    solicitudArchivo.setFkArchivo(archivoNew.getId());
+                    solicitudArchivo.setFkSolicitud(idSolicitud);
+                    solicitudArchivo.setEsRespuesta(true);
+                    controlador.serviceSolicitudArchivos().guardar(solicitudArchivo);
+                }
+
+            }
             session.setAttribute("mensaje", new Mensaje("Formulario registrado", "Se ha registrado exitosamente la respuesta.", TipoMensaje.SUCCESS));
             resp.sendRedirect(req.getContextPath() + "/main/detalle_pqrs.jsp?id=" + idSolicitud);
-
+            return;
         } catch (FileUploadException e) {
             e.printStackTrace();
         }

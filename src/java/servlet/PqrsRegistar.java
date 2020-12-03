@@ -1,7 +1,11 @@
 package servlet;
 
+import dto.ArchivoDto;
 import dto.FuncionarioDto;
+import dto.Mensaje;
+import dto.SolicitudArchivosDto;
 import dto.SolicitudDto;
+import dto.TipoMensaje;
 import dto.UsuarioDto;
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,6 +23,7 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import service.postgres.Service;
+import util.ArchivoSubir;
 import util.Utilidades;
 
 public class PqrsRegistar extends HttpServlet {
@@ -60,7 +65,7 @@ public class PqrsRegistar extends HttpServlet {
             String correo = null;
 
             String descripcion = null;
-            InputStream archivo = null;
+            FileItem archivo = null;
 
             while (it.hasNext()) {
                 FileItem fileItem = it.next();
@@ -114,11 +119,12 @@ public class PqrsRegistar extends HttpServlet {
                             break;
                     }
                 } else {
-                    archivo = fileItem.getInputStream();
+                    archivo = fileItem;
                 }
             }
 
             if (apellido1 == null || nombre1 == null || correo == null || idTipoUsuario == null || idTipoIdentificacion == null || idTipoSolicitud == null) {
+                session.setAttribute("mensaje", new Mensaje("Datos incompletos", "Debe ingresar todos los campos con *.", TipoMensaje.ERROR));
                 resp.sendRedirect(req.getContextPath() + "/registrar.jsp");
                 return;
             }
@@ -131,6 +137,7 @@ public class PqrsRegistar extends HttpServlet {
             FuncionarioDto funcionario = controlador.serviceFuncionario().buscarDisponible();
 
             if (funcionario == null) {
+                session.setAttribute("mensaje", new Mensaje("Sin funcionarios", "En este momento no se encuentra ningún funcionario laborando, porfavor intentelo despues.", TipoMensaje.WARNING));
                 resp.sendRedirect(req.getContextPath() + "/registrar.jsp");
                 return;
             }
@@ -153,8 +160,8 @@ public class PqrsRegistar extends HttpServlet {
                 usuario.setIdentificacion(identificacion);
                 usuario.setPrimerApellido(apellido1);
                 usuario.setPrimerNombre(nombre1);
-                usuario.setSegundoApellido(apellido2 != null ? apellido2: "");
-                usuario.setSegundoNombre(nombre2 != null ? nombre2: "");
+                usuario.setSegundoApellido(apellido2 != null ? apellido2 : "");
+                usuario.setSegundoNombre(nombre2 != null ? nombre2 : "");
                 usuario.setTelefonoFijo(telefono);
                 usuario = controlador.serviceUsuario().guardar(usuario);
                 if (usuario != null) {
@@ -173,7 +180,24 @@ public class PqrsRegistar extends HttpServlet {
             solicitud.setOtroMotivo("");
             solicitud.setRespondida(false);
 
-            controlador.serviceSolicitud().guardar(solicitud);
+            solicitud = controlador.serviceSolicitud().guardar(solicitud);
+
+            if (solicitud != null) {
+                if (archivo != null) {
+                    ArchivoDto archivoNew = new ArchivoSubir().subirServidor(archivo);
+                    if (archivoNew != null) {
+                        SolicitudArchivosDto solicitudArchivo = new SolicitudArchivosDto();
+                        solicitudArchivo.setFkArchivo(archivoNew.getId());
+                        solicitudArchivo.setFkSolicitud(solicitud.getId());
+                        solicitudArchivo.setEsRespuesta(false);
+                        controlador.serviceSolicitudArchivos().guardar(solicitudArchivo);
+                    }
+                }
+                session.setAttribute("mensaje", new Mensaje("Realizado", "Se ha registrado la solicitud correctamente, el número de radicado es: " + solicitud.getId(), TipoMensaje.SUCCESS));
+            } else {
+                session.setAttribute("mensaje", new Mensaje("Formulario invalido", "No se pudo registrar la PQRS, verifique la información ingresada e intente de nuevo", TipoMensaje.WARNING));
+            }
+
             resp.sendRedirect(req.getContextPath() + "/index.jsp");
         } catch (FileUploadException e) {
             e.printStackTrace();
