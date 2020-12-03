@@ -44,6 +44,14 @@
         <servlet-name>TipoUsuarioActualizar</servlet-name>
         <servlet-class>servlet.TipoUsuarioActualizar</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>MotivoSolicitudRegistrar</servlet-name>
+        <servlet-class>servlet.MotivoSolicitudRegistrar</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MotivoSolicitudActializar</servlet-name>
+        <servlet-class>servlet.MotivoSolicitudActializar</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>pruebas</servlet-name>
         <url-pattern>/pruebas</url-pattern>
@@ -87,6 +95,14 @@
     <servlet-mapping>
         <servlet-name>TipoUsuarioActualizar</servlet-name>
         <url-pattern>/actualizar-tipo-usuario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MotivoSolicitudRegistrar</servlet-name>
+        <url-pattern>/registrar-motivo-solicitud</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MotivoSolicitudActializar</servlet-name>
+        <url-pattern>/actualizar-motivo-solicitud</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -5,7 +5,18 @@
 <jsp:useBean id="controlador" scope="session" class="service.postgres.Service" />
 <jsp:include page="../includes/verificarAcceso.jsp" flush="true"/>
 <%
-    List<TipoSolicitudDto> tiposSolicitudes = controlador.serviceTipoSolicitud().listarTodos();
+    Integer id_tipo = Utilidades.validateInputNumber(request.getParameter("id"));
+
+    if (id_tipo == null) {
+        out.print("<script>window.location.href = '" + request.getContextPath() + "/main/tipos_solicitudes.jsp';</script>");
+    }
+
+    TipoSolicitudDto tipoSolicitud = controlador.serviceTipoSolicitud().buscarPorId(id_tipo);
+
+    if (tipoSolicitud == null) {
+        out.print("<script>window.location.href = '" + request.getContextPath() + "/main/tipos_solicitudes.jsp';</script>");
+    } else {
+        List<MotivoSolicitudDto> motivos = controlador.serviceMotivoSolicitud().listarPorTipoSolicitud(id_tipo);
 %>
 <!doctype html>
 <html lang="es">
@@ -30,11 +41,22 @@
 
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Listado de Tipos de Solicitudes</h6>
+                                <h6 class="m-0 font-weight-bold text-primary"><a class="btn btn-sm btn-outline-dark mr-1" href="tipos_solicitudes.jsp"><i class="fas fa-arrow-circle-left"></i> Volver</a>Motivos de Solicitudes</h6>
                             </div>
                             <div class="card-body">
 
-                                <a class="btn btn-success mb-3" title="Registrar" href="registrar_tipo_solicitud.jsp">
+                                <div class="form-group">
+                                    <div class="form-row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Tipo de Solicitud </label>
+                                                <input type="text" class="form-control" readonly disabled value="<%=tipoSolicitud.getDescripcion()%>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <a class="btn btn-success mb-3" title="Registrar" href="registrar_motivo_solicitud.jsp?id=<%=id_tipo%>">
                                     <i class="fas fa-plus-circle"></i> Registrar
                                 </a>
 
@@ -49,13 +71,12 @@
                                         </thead>
                                         <tbody>
                                             <%
-                                                for (TipoSolicitudDto tipo : tiposSolicitudes) {
+                                                for (MotivoSolicitudDto tipo : motivos) {
                                             %>
                                             <tr>
                                                 <td>
                                                     <div class="d-flex justify-content-center align-content-center">
-                                                        <a title="Detalle" class="btn btn-sm btn-outline-info m-1" href="actualizar_tipo_solicitud.jsp?id=<%=tipo.getId()%>"  ><i class="fas fa-info-circle"></i></a>
-                                                        <a title="Motivos" class="btn btn-sm btn-outline-dark m-1" href="motivos_solicitudes.jsp?id=<%=tipo.getId()%>"  ><i class="fas fa-list"></i></a>
+                                                        <a title="Detalle" class="btn btn-sm btn-outline-info m-1" href="actualizar_motivo_solicitud.jsp?id=<%=tipo.getId()%>"  ><i class="fas fa-info-circle"></i></a>
                                                     </div>
                                                 </td>
                                                 <td><%=tipo.getDescripcion()%></td>
@@ -80,4 +101,5 @@
         <%@include file="../includes/scripts.jsp" %>
     </body>
 </html>
+<% }%>
 

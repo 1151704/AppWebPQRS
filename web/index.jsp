@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!doctype html>
+<jsp:useBean id="controlador" scope="session" class="service.postgres.Service" /><!doctype html>
 <html lang="es">
     <head>
         <%@include file="includes/head.jsp" %>
