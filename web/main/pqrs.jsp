@@ -75,7 +75,7 @@
                                                 <td><%=solicitud.getDescripcion()%></td>
                                                 <td><%=solicitud.getRespuesta() != null ? solicitud.getRespuesta() : ""%></td>
                                                 <td><%=Utilidades.formatDate(solicitud.getFechaRegistro(), "yyyy-MM-dd HH:mm")%></td>
-                                                <td><%=solicitud.getFechaRespuesta() != null ? solicitud.getFechaRespuesta() : ""%></td>
+                                                <td><%=solicitud.getFechaRespuesta() != null ? Utilidades.formatDate(solicitud.getFechaRespuesta(), "yyyy-MM-dd HH:mm") : ""%></td>
                                             </tr>
                                             <% }%>
                                         </tbody>

@@ -53,6 +53,12 @@
     </li>
     <% } %>
 
+    <li class="nav-item active">
+        <a class="nav-link" href="<%=request.getContextPath()%>/main/generar_reporte.jsp">
+            <i class="fas fa-file"></i>
+            <span>Generar reporte</span></a>
+    </li>
+
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 

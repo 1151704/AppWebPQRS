@@ -3,13 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/OMAR/Documents/UFPS/AYD/AppWebPQRS/web/main/registrar_funcionario.jsp</file>
-            <file>file:/C:/Users/OMAR/Documents/UFPS/AYD/AppWebPQRS/src/java/dao/IFuncionarioDao.java</file>
-            <file>file:/C:/Users/OMAR/Documents/UFPS/AYD/AppWebPQRS/web/main/funcionarios.jsp</file>
-            <file>file:/C:/Users/OMAR/Documents/UFPS/AYD/AppWebPQRS/src/java/servlet/FuncionarioRegistrar.java</file>
-            <file>file:/C:/Users/OMAR/Documents/UFPS/AYD/AppWebPQRS/web/main/actualizar_funcionario.jsp</file>
-            <file>file:/C:/Users/OMAR/Documents/UFPS/AYD/AppWebPQRS/src/java/dao/postgres/RepositoryDao.java</file>
-            <file>file:/C:/Users/OMAR/Documents/UFPS/AYD/AppWebPQRS/src/java/dao/postgres/FuncionarioDao.java</file>
+            <file>file:/C:/Users/OMAR/Documents/UFPS/AYD/AppWebPQRS/src/java/resources/parametros.properties</file>
         </group>
     </open-files>
 </project-private>
