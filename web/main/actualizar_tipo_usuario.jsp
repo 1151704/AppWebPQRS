@@ -48,7 +48,7 @@
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
 
-                                <h6 class="m-0 font-weight-bold text-primary"><a class="btn btn-sm btn-outline-dark mr-1" href="tipos_usuarios.jsp"><i class="fas fa-arrow-circle-left"></i> Volver</a>Actualizat tipo de usuario</h6>
+                                <h6 class="m-0 font-weight-bold text-primary"><a class="btn btn-sm btn-outline-dark mr-1" href="tipos_usuarios.jsp"><i class="fas fa-arrow-circle-left"></i> Volver</a>Actualizat Tipo de Usuario</h6>
                             </div>
                             <div class="card-body">
                                 <form action="<%=request.getContextPath()%>/actualizar-tipo-usuario" method="post">

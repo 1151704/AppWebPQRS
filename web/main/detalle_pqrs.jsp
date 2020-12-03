@@ -31,7 +31,7 @@
 <html lang="es">
     <head>
         <%@include file="../includes/head.jsp" %>
-        <title>Detalle - PQRS</title>
+        <title>Detalle PQRS - PQRS</title>
     </head>
     <body>
         <!-- Page Wrapper -->

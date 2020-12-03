@@ -47,7 +47,7 @@
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
 
-                                <h6 class="m-0 font-weight-bold text-primary"><a class="btn btn-sm btn-outline-dark mr-1" href="tipos_solicitudes.jsp"><i class="fas fa-arrow-circle-left"></i> Volver</a>Registrar Funcionario</h6>
+                                <h6 class="m-0 font-weight-bold text-primary"><a class="btn btn-sm btn-outline-dark mr-1" href="tipos_solicitudes.jsp"><i class="fas fa-arrow-circle-left"></i> Volver</a>Actualizar Tipo de Solicitud</h6>
                             </div>
                             <div class="card-body">
                                 <form action="<%=request.getContextPath()%>/actualizar-tipo-solicitud" method="post">

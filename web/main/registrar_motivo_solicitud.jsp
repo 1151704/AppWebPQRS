@@ -27,7 +27,7 @@
 <html lang="es">
     <head>
         <%@include file="../includes/head.jsp" %>
-        <title>Tipo Solicitud nuevo - PQRS</title>
+        <title>Motivo Solicitud Nuevo - PQRS</title>
     </head>
     <body>
         <!-- Page Wrapper -->

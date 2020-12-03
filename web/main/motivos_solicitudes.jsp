@@ -22,7 +22,7 @@
 <html lang="es">
     <head>
         <%@include file="../includes/head.jsp" %>
-        <title>Tipos de Solicitudes - PQRS</title>
+        <title>Motivos de Solicitudes - PQRS</title>
     </head>
     <body>
         <!-- Page Wrapper -->

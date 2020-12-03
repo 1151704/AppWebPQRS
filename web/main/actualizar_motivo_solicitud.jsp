@@ -27,7 +27,7 @@
 <html lang="es">
     <head>
         <%@include file="../includes/head.jsp" %>
-        <title>Tipo Solicitud - PQRS</title>
+        <title>Motivo Solicitud - PQRS</title>
     </head>
     <body>
         <!-- Page Wrapper -->
@@ -47,7 +47,7 @@
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
 
-                                <h6 class="m-0 font-weight-bold text-primary"><a class="btn btn-sm btn-outline-dark mr-1" href="motivos_solicitudes.jsp?id=<%=tipoSolicitud.getId()%>"><i class="fas fa-arrow-circle-left"></i> Volver</a>Registrar Funcionario</h6>
+                                <h6 class="m-0 font-weight-bold text-primary"><a class="btn btn-sm btn-outline-dark mr-1" href="motivos_solicitudes.jsp?id=<%=tipoSolicitud.getId()%>"><i class="fas fa-arrow-circle-left"></i> Volver</a>Actualizar Motivo Solicitud</h6>
                             </div>
                             <div class="card-body">
                                 <form action="<%=request.getContextPath()%>/actualizar-motivo-solicitud" method="post">

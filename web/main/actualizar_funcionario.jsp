@@ -26,7 +26,7 @@
 <html lang="es">
     <head>
         <%@include file="../includes/head.jsp" %>
-        <title>Funcionario nuevo - PQRS</title>
+        <title>Funcionario - PQRS</title>
     </head>
     <body>
         <!-- Page Wrapper -->
@@ -46,7 +46,7 @@
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
 
-                                <h6 class="m-0 font-weight-bold text-primary"><a class="btn btn-sm btn-outline-dark mr-1" href="funcionarios.jsp"><i class="fas fa-arrow-circle-left"></i> Volver</a>Registrar Funcionario</h6>
+                                <h6 class="m-0 font-weight-bold text-primary"><a class="btn btn-sm btn-outline-dark mr-1" href="funcionarios.jsp"><i class="fas fa-arrow-circle-left"></i> Volver</a>Actualizar Funcionario</h6>
                             </div>
                             <div class="card-body">
                                 <form action="<%=request.getContextPath()%>/actualizar-funcionario" method="post">

@@ -23,8 +23,8 @@
             </header>
 
             <main role="main" class="inner cover">
-                <h1 class="cover-heading">Cover your page.</h1>
-                <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
+                <h1 class="cover-heading">Peticiones, Quejas, Reclamos y Solicitudes.</h1>
+                <p class="lead">APLICATIVO WEB DE PETICIONES QUEJAS, RECLAMOS Y SUGERENCIAS (PQRS) PARA EL PROGRAMA DE ING. DE SISTEMAS DE LA UNIVERSIDAD FRANCISCO DE PAULA SANTANDER.</p>
                 <p class="lead">
                     <a href="registrar.jsp" class="btn btn-lg mr-4 btn-primary">Registrar</a>
                     <a href="consultar.jsp" class="btn btn-lg ml-4 btn-secondary">Consultar</a>

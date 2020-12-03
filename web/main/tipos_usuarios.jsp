@@ -11,7 +11,7 @@
 <html lang="es">
     <head>
         <%@include file="../includes/head.jsp" %>
-        <title>Tipos de Solicitudes - PQRS</title>
+        <title>Tipos de Usuarios - PQRS</title>
     </head>
     <body>
         <!-- Page Wrapper -->
@@ -30,7 +30,7 @@
 
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Listado de Tipos de Solicitudes</h6>
+                                <h6 class="m-0 font-weight-bold text-primary">Listado de Tipos de Usuarios</h6>
                             </div>
                             <div class="card-body">
 

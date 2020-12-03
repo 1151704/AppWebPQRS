@@ -12,7 +12,7 @@
 <html lang="es">
     <head>
         <%@include file="../includes/head.jsp" %>
-        <title>Tipo Usuario nuevo - PQRS</title>
+        <title>Tipo Usuario Nuevo - PQRS</title>
     </head>
     <body>
         <!-- Page Wrapper -->
