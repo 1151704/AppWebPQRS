@@ -24,6 +24,7 @@
 
             <main role="main" class="">
                 <div class="d-block container w-50 bg-white p-5 border border-primary rounded">
+                    <h3 class="title">Panel Administrativo</h3>
                     <form action="login" method="POST">
                         <div class="form-group">
                             <label>Nombre de usuario</label>

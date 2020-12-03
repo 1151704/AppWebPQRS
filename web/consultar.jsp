@@ -24,17 +24,18 @@
 
             <main role="main" class="">
                 <div class="d-block container w-50 bg-white p-5 border border-primary rounded">
-                    <form action="login" method="POST">
+                    <h3 class="title">Consultar PQRS</h3>
+                    <form action="consultar-pqrs" method="POST">
                         <div class="form-group">
-                            <label>Numeró de radicado</label>
-                            <input type="text" class="form-control" name="username" required autofocus>
+                            <label>Numeró de radicado *</label>
+                            <input type="text" class="form-control" name="radicado" required autofocus>
                         </div>
                         <div class="form-group">
-                            <label>Identificación</label>
-                            <input type="password" class="form-control" name="password" required>
+                            <label>Identificación *</label>
+                            <input type="text" class="form-control" name="identificacion" required>
                         </div>
                         <div class="form-group">
-                            <button class="btn btn-success" type="button" >Consulta PQRS</button>
+                            <button class="btn btn-success" type="submit" >Consulta PQRS</button>
                         </div>
                     </form>
                 </div>

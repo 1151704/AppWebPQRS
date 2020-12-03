@@ -56,6 +56,10 @@
         <servlet-name>ReportePqrs</servlet-name>
         <servlet-class>servlet.ReportePqrs</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PqrsConsultar</servlet-name>
+        <servlet-class>servlet.PqrsConsultar</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>pruebas</servlet-name>
         <url-pattern>/pruebas</url-pattern>
@@ -111,6 +115,10 @@
     <servlet-mapping>
         <servlet-name>ReportePqrs</servlet-name>
         <url-pattern>/generar-reporte</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PqrsConsultar</servlet-name>
+        <url-pattern>/consultar-pqrs</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

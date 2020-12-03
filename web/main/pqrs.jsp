@@ -13,7 +13,7 @@
         solicitudes = controlador.serviceSolicitud().listarTodas();
     } else {
         solicitudes = controlador.serviceSolicitud().buscarPorFuncionario(funcionario.getId());
-    }    
+    }
 %>
 <!doctype html>
 <html lang="es">
@@ -46,6 +46,7 @@
                                         <thead>
                                             <tr>
                                                 <th>Acción</th>
+                                                <th>Radicado</th>
                                                 <th>Identificación de usuario</th>
                                                 <th>Usuario</th>
                                                 <th>Tipo de PQRS</th>
@@ -57,7 +58,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <%                                                
+                                            <%
                                                 for (SolicitudDto solicitud : solicitudes) {
                                                     UsuarioDto usuario = solicitud.getUsuario();
                                                     MotivoSolicitudDto motivo = solicitud.getMotivo();
@@ -68,6 +69,7 @@
                                                         <a title="Detalle" class="btn btn-sm btn-outline-info m-1" href="detalle_pqrs.jsp?id=<%=solicitud.getId()%>"  ><i class="fas fa-info-circle"></i></a>
                                                     </div>
                                                 </td>
+                                                <td><%=solicitud.getId()%></td>
                                                 <td><%=usuario != null ? usuario.getTipoIdentificacion().getAbreviatura() + " " + usuario.getIdentificacion() : ""%></td>
                                                 <td><%=usuario != null ? usuario.getNombreCompleto() : ""%></td>
                                                 <td><%=motivo.getTipo().getDescripcion()%></td>
