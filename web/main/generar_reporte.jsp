@@ -27,14 +27,14 @@
     <body>
         <!-- Page Wrapper -->
         <div id="wrapper">
-            <%@include file="../includes/menu.jsp" %>
+            <jsp:include page="../includes/menu.jsp" flush="true" />
 
             <!-- Content Wrapper -->
             <div id="content-wrapper" class="d-flex flex-column">
 
                 <!-- Main Content -->
                 <div id="content">
-                    <%@include file="../includes/topbar.jsp" %>     
+                    <jsp:include page="../includes/topbar.jsp" %>     
 
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
@@ -101,7 +101,7 @@
 
                 </div>
                 <!-- End of Main Content -->
-                <%@include file="../includes/footer.jsp" %>
+                <jsp:include page="../includes/footer.jsp" flush="true" />
             </div>
             <!-- End of Content Wrapper -->
         </div>
