@@ -37,6 +37,6 @@
                 </div>
             </footer>
         </div>
-        <%@include file="includes/scripts.jsp" %>
+        <jsp:include page="includes/scripts.jsp" flush="true" />
     </body>
 </html>

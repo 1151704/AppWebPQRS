@@ -182,7 +182,7 @@
                 </div>
             </div>
         </div>
-        <%@include file="includes/scripts.jsp" %>
+        <jsp:include page="includes/scripts.jsp" flush="true" />
         <script>
             cargarImplements("<%=request.getContextPath()%>/implements/motivos_solicitud.jsp", {tipo: $("#form_tipo_solicitud").val()}, "#select_motivos_solicitud")
 
