@@ -9,7 +9,7 @@ public class SolicitudDao extends RepositoryDao<SolicitudDto, Integer> implement
 
     @Override
     public List<SolicitudDto> buscarPorFuncionario(Integer fkTipoIdentificacion) {
-        String query = String.format("select * from %s where fk_tipo_identificacion = ? order by respondida, fecha_registro, id  ", getTableName());
+        String query = String.format("select * from %s where fk_funcionario = ? order by respondida, fecha_registro, id  ", getTableName());
 
         return listDtoByQuery(query, fkTipoIdentificacion);
     }

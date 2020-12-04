@@ -53,8 +53,8 @@
                                                 <div class="form-group">
                                                     <label>Estado de PQRS</label>
                                                     <select class="form-control" name="estado">
-                                                        <option value="2">Todos</option>
-                                                        <option value="0">Pendientes</option>
+                                                        <option value="0">Todos</option>
+                                                        <option value="2">Pendientes</option>
                                                         <option value="1">Respondidas</option>
                                                     </select>
                                                 </div>

@@ -74,7 +74,7 @@
                                     <div class="col-lg-2">
                                         <div class="form-group">
                                             <label>Código</label>
-                                            <input type="number" class="form-control" name="codigo_interno" required="true">
+                                            <input type="number" class="form-control" name="codigo_interno">
                                         </div>
                                     </div>
                                 </div>

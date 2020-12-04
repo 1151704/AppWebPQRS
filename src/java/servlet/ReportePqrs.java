@@ -1,19 +1,17 @@
 package servlet;
 
-import Util.PositionPdfPCell.ImagenAbsolute;
-import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
-import com.itextpdf.text.Image;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import dto.FuncionarioDto;
 import dto.Mensaje;
 import dto.MotivoSolicitudDto;
 import dto.SolicitudDto;
@@ -21,9 +19,7 @@ import dto.TipoMensaje;
 import dto.UsuarioDto;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -72,12 +68,18 @@ public class ReportePqrs extends HttpServlet {
         Service controlador = (Service) session.getAttribute("controlador");
         String imagen = CONTEXTO + "static/images/fondo_universidad.jpeg";
 
-        if (session.getAttribute("usuarioActual") != null || true) {
+        if (session.getAttribute("usuarioActual") != null) {
+
+            FuncionarioDto funcionario = (FuncionarioDto) session.getAttribute("usuarioActual");
 
             List<SolicitudDto> solicitudes;
 
-            if (idFuncionario == 0) {
+            if (idFuncionario != null && idFuncionario == 0) {
                 idFuncionario = null; // todos los funcionarios
+            }
+
+            if (!funcionario.getEsAdministrador()) {
+                idFuncionario = funcionario.getId();
             }
 
             // Filtrado de solicitudes
@@ -123,10 +125,10 @@ public class ReportePqrs extends HttpServlet {
                 documento.open();
                 documento.addTitle(titulo);
 
-                PdfPTable tabla = new PdfPTable(10);
+                PdfPTable tabla = new PdfPTable(8);
                 PdfPCell cell;
 
-                tabla.setWidths(new int[]{3, 15, 15, 10, 10, 20, 20, 8, 8, 8});
+                tabla.setWidths(new int[]{3, 15, 15, 10, 10, 8, 8, 8});
                 tabla.setWidthPercentage(100);
                 tabla.setHeaderRows(1);
 
@@ -136,13 +138,13 @@ public class ReportePqrs extends HttpServlet {
                 cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
                 tabla.addCell(cell);
 
-                cell = new PdfPCell(new Phrase("Usuario", font_TH));
+                cell = new PdfPCell(new Phrase("Identificación", font_TH));
                 cell.setBackgroundColor(bg_TH);
                 cell.setHorizontalAlignment(Element.ALIGN_CENTER);
                 cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
                 tabla.addCell(cell);
 
-                cell = new PdfPCell(new Phrase("Identificación", font_TH));
+                cell = new PdfPCell(new Phrase("Usuario", font_TH));
                 cell.setBackgroundColor(bg_TH);
                 cell.setHorizontalAlignment(Element.ALIGN_CENTER);
                 cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
@@ -155,18 +157,6 @@ public class ReportePqrs extends HttpServlet {
                 tabla.addCell(cell);
 
                 cell = new PdfPCell(new Phrase("Motivo", font_TH));
-                cell.setBackgroundColor(bg_TH);
-                cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-                cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-                tabla.addCell(cell);
-
-                cell = new PdfPCell(new Phrase("Descripción", font_TH));
-                cell.setBackgroundColor(bg_TH);
-                cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-                cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-                tabla.addCell(cell);
-
-                cell = new PdfPCell(new Phrase("Respuesta", font_TH));
                 cell.setBackgroundColor(bg_TH);
                 cell.setHorizontalAlignment(Element.ALIGN_CENTER);
                 cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
@@ -201,11 +191,11 @@ public class ReportePqrs extends HttpServlet {
                     cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
                     tabla.addCell(cell);
 
-                    cell = new PdfPCell(new Phrase(usuario != null ? usuario.getTipoIdentificacion().getAbreviatura() + " " + usuario.getIdentificacion() : "", font_normal));
+                    cell = new PdfPCell(new Phrase(usuario != null ? usuario.getNombreCompleto() : "", font_normal));
                     cell.setBackgroundColor(bg_TD);
                     tabla.addCell(cell);
 
-                    cell = new PdfPCell(new Phrase(usuario != null ? usuario.getNombreCompleto() : "", font_normal));
+                    cell = new PdfPCell(new Phrase(usuario != null ? usuario.getTipoIdentificacion().getAbreviatura() + " " + usuario.getIdentificacion() : "", font_normal));
                     cell.setBackgroundColor(bg_TD);
                     tabla.addCell(cell);
 
@@ -214,14 +204,6 @@ public class ReportePqrs extends HttpServlet {
                     tabla.addCell(cell);
 
                     cell = new PdfPCell(new Phrase(motivo.getDescripcion(), font_normal));
-                    cell.setBackgroundColor(bg_TD);
-                    tabla.addCell(cell);
-
-                    cell = new PdfPCell(new Phrase(solicitud.getDescripcion(), font_normal));
-                    cell.setBackgroundColor(bg_TD);
-                    tabla.addCell(cell);
-
-                    cell = new PdfPCell(new Phrase(solicitud.getRespuesta() != null ? solicitud.getRespuesta() : "", font_normal));
                     cell.setBackgroundColor(bg_TD);
                     tabla.addCell(cell);
 
@@ -243,7 +225,7 @@ public class ReportePqrs extends HttpServlet {
                     cell = new PdfPCell(new Phrase("Sin resultados", font_TH));
                     cell.setBackgroundColor(bg_TD);
                     cell.setMinimumHeight(20);
-                    cell.setColspan(10);
+                    cell.setColspan(8);
                     cell.setHorizontalAlignment(Element.ALIGN_CENTER);
                     cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
                     tabla.addCell(cell);

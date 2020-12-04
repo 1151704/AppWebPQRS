@@ -83,9 +83,12 @@
 .container-html {
     display: block;
     padding: .3em;
-    max-height: 200px; 
+    max-height: 150px; 
     overflow-y: auto;
     border: 1px solid #d1d3e2;
     border-radius: .25em;
     background: #eaecf4;
+}
+.container-html-td {
+    max-width: 350px!important;
 }

@@ -32,6 +32,7 @@ public class RegistrarRespuestaPqrs extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        session = req.getSession();
         boolean isMultipartContent = ServletFileUpload.isMultipartContent(req);
         if (!isMultipartContent) {
             return;
@@ -45,7 +46,6 @@ public class RegistrarRespuestaPqrs extends HttpServlet {
 
         try {
 
-            session = req.getSession();
             List<FileItem> fields = upload.parseRequest(req);
             Iterator<FileItem> it = fields.iterator();
 

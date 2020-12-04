@@ -55,6 +55,9 @@
                                                 <th>Respuesta</th>
                                                 <th>Fecha de registro</th>
                                                 <th>Fecha de respuesta</th>
+                                                    <% if (funcionario.getEsAdministrador()) { %>
+                                                <th>Funcionario</th>
+                                                    <% } %>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -62,6 +65,10 @@
                                                 for (SolicitudDto solicitud : solicitudes) {
                                                     UsuarioDto usuario = solicitud.getUsuario();
                                                     MotivoSolicitudDto motivo = solicitud.getMotivo();
+                                                    FuncionarioDto asignada = null;
+                                                    if (funcionario.getEsAdministrador()) {
+                                                        asignada = solicitud.getFuncionario();
+                                                    }
                                             %>
                                             <tr class="<%=solicitud.getRespondida() ? "tr-select" : ""%>">
                                                 <td>
@@ -74,16 +81,24 @@
                                                 <td><%=usuario != null ? usuario.getNombreCompleto() : ""%></td>
                                                 <td><%=motivo.getTipo().getDescripcion()%></td>
                                                 <td><%=motivo.getDescripcion()%></td>
-                                                <td><div class="container-html"><%=solicitud.getDescripcion()%></div></td>
+                                                <td><div class="container-html container-html-td"><%=solicitud.getDescripcion()%></div></td>
                                                 <td>
                                                     <% if (solicitud.getRespondida()) {%>
-                                                    <div class="container-html"><%=solicitud.getRespuesta()%></div>
+                                                    <div class="container-html container-html-td"><%=solicitud.getRespuesta()%></div>
                                                     <%}%>
                                                 </td>
                                                 <td><%=Utilidades.formatDate(solicitud.getFechaRegistro(), "yyyy-MM-dd HH:mm")%></td>
                                                 <td><%=solicitud.getFechaRespuesta() != null ? Utilidades.formatDate(solicitud.getFechaRespuesta(), "yyyy-MM-dd HH:mm") : ""%></td>
+                                                <% if (funcionario.getEsAdministrador()) {%>
+                                                <td><%=asignada.getNombreCompleto()%></td>
+                                                <% } %>
                                             </tr>
                                             <% }%>
+                                            <% if (solicitudes.isEmpty()) { %>
+                                            <tr>
+                                                <td colspan="12" align="center">Sin resultados</td>
+                                            </tr>
+                                            <% } %>
                                         </tbody>
                                     </table>
                                 </div>
