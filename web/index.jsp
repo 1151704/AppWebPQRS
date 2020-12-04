@@ -2,7 +2,7 @@
 <jsp:useBean id="controlador" scope="session" class="service.postgres.Service" /><!doctype html>
 <html lang="es">
     <head>
-        <%@include file="includes/head.jsp" %>
+        <jsp:include page="includes/head.jsp" flush="true" />
         <link rel="stylesheet" href="<%=request.getContextPath()%>/static/css/cover.css">
         <title>Inicio - PQRS</title>
     </head>

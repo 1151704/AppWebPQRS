@@ -3,7 +3,7 @@
 <!doctype html>
 <html lang="es">
     <head>
-        <%@include file="includes/head.jsp" %>
+        <jsp:include page="includes/head.jsp" flush="true" />
         <link rel="stylesheet" href="<%=request.getContextPath()%>/static/css/cover.css">
         <title>Login - PQRS</title>
     </head>
@@ -47,7 +47,7 @@
                 </div>
             </footer>
         </div>
-        <%@include file="includes/scripts.jsp" %>
+        <jsp:include page="includes/scripts.jsp" flush="true" />
     </body>
 </html>
 

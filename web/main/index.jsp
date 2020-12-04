@@ -3,7 +3,7 @@
 <!doctype html>
 <html lang="es">
     <head>
-        <%@include file="../includes/head.jsp" %>
+        <jsp:include page="../includes/head.jsp" flush="true" />
         <title>Inicio - PQRS</title>
     </head>
     <body>
@@ -31,7 +31,7 @@
             <!-- End of Content Wrapper -->
         </div>
         <!-- End of Page Wrapper -->
-        <%@include file="../includes/scripts.jsp" %>
+        <jsp:include page="../includes/scripts.jsp" flush="true" />
     </body>
 </html>
 
