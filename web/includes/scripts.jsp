@@ -3,7 +3,7 @@
 <script src="<%=request.getContextPath()%>/static/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="<%=request.getContextPath()%>/static/sb-admin-2/sb-admin-2.min.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/scripts.js"></script>
-
+<script src="//cdn.ckeditor.com/4.15.1/basic/ckeditor.js"></script>
 <% if (session.getAttribute("mensaje") != null && session.getAttribute("mensaje") instanceof Mensaje) {%>
 <%
     Mensaje mensaje = (Mensaje) session.getAttribute("mensaje");

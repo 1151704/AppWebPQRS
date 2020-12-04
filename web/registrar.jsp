@@ -68,7 +68,7 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label>Identificación *</label>
-                                            <input type="text" class="form-control" name="identificacion" required="true">
+                                            <input type="number" class="form-control" name="identificacion" required="true">
                                         </div>
                                     </div>
                                     <div class="col-lg-2">
@@ -189,6 +189,8 @@
             $("#form_tipo_solicitud").on('change', function (e) {
                 cargarImplements("<%=request.getContextPath()%>/implements/motivos_solicitud.jsp", {tipo: this.value}, "#select_motivos_solicitud")
             });
+            CKEDITOR.replace('descripcion');
+            multipleFiles('#inputGroupFile01', 1)
         </script>
     </body>
 </html>

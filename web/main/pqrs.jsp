@@ -63,7 +63,7 @@
                                                     UsuarioDto usuario = solicitud.getUsuario();
                                                     MotivoSolicitudDto motivo = solicitud.getMotivo();
                                             %>
-                                            <tr class="<%=solicitud.getRespondida()? "tr-select": "" %>">
+                                            <tr class="<%=solicitud.getRespondida() ? "tr-select" : ""%>">
                                                 <td>
                                                     <div class="d-flex justify-content-center align-content-center">
                                                         <a title="Detalle" class="btn btn-sm btn-outline-info m-1" href="detalle_pqrs.jsp?id=<%=solicitud.getId()%>"  ><i class="fas fa-info-circle"></i></a>
@@ -74,8 +74,12 @@
                                                 <td><%=usuario != null ? usuario.getNombreCompleto() : ""%></td>
                                                 <td><%=motivo.getTipo().getDescripcion()%></td>
                                                 <td><%=motivo.getDescripcion()%></td>
-                                                <td><%=solicitud.getDescripcion()%></td>
-                                                <td><%=solicitud.getRespuesta() != null ? solicitud.getRespuesta() : ""%></td>
+                                                <td><div class="container-html"><%=solicitud.getDescripcion()%></div></td>
+                                                <td>
+                                                    <% if (solicitud.getRespondida()) {%>
+                                                    <div class="container-html"><%=solicitud.getRespuesta()%></div>
+                                                    <%}%>
+                                                </td>
                                                 <td><%=Utilidades.formatDate(solicitud.getFechaRegistro(), "yyyy-MM-dd HH:mm")%></td>
                                                 <td><%=solicitud.getFechaRespuesta() != null ? Utilidades.formatDate(solicitud.getFechaRespuesta(), "yyyy-MM-dd HH:mm") : ""%></td>
                                             </tr>

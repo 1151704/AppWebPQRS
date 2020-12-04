@@ -158,7 +158,7 @@
                                         <div class="col-lg-12">
                                             <div class="form-group">
                                                 <label>Solicitud</label>
-                                                <textarea class="form-control" disabled="true" readonly="true"><%=solicitud.getDescripcion()%></textarea>
+                                                <div class="container-html"><%=solicitud.getDescripcion()%></div>
                                             </div>
                                         </div>
                                     </div>                
@@ -217,7 +217,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label>Respuesta</label>
-                                            <textarea class="form-control" disabled="true" readonly="true"><%=solicitud.getRespuesta()%></textarea>
+                                            <div class="container-html"><%=solicitud.getRespuesta()%></div>
                                         </div>
                                     </div>
                                 </div>
@@ -266,6 +266,10 @@
         </div>
         <!-- End of Page Wrapper -->
         <%@include file="../includes/scripts.jsp" %>
+        <script>
+            CKEDITOR.replace('respuesta');
+            multipleFiles('#inputGroupFile01', 1)
+        </script>
     </body>
 </html>
 <% }%>

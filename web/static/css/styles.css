@@ -79,3 +79,13 @@
 .tr-select {
     background-color: rgba(211, 222, 253, .4)
 }
+
+.container-html {
+    display: block;
+    padding: .3em;
+    max-height: 200px; 
+    overflow-y: auto;
+    border: 1px solid #d1d3e2;
+    border-radius: .25em;
+    background: #eaecf4;
+}
