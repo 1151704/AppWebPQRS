@@ -1,3 +1,4 @@
+<%@page import="dto.FuncionarioDto"%>
 <%@page import="util.Utilidades"%>
 <%@page import="dto.MotivoSolicitudDto"%>
 <%@page import="dto.UsuarioDto"%>

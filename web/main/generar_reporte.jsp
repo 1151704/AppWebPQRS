@@ -34,7 +34,7 @@
 
                 <!-- Main Content -->
                 <div id="content">
-                    <jsp:include page="../includes/topbar.jsp" %>     
+                    <jsp:include page="../includes/topbar.jsp" flush="true" />    
 
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
