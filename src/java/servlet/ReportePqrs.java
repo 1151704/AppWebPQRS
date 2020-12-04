@@ -125,10 +125,10 @@ public class ReportePqrs extends HttpServlet {
                 documento.open();
                 documento.addTitle(titulo);
 
-                PdfPTable tabla = new PdfPTable(8);
+                PdfPTable tabla = new PdfPTable(9);
                 PdfPCell cell;
 
-                tabla.setWidths(new int[]{3, 15, 15, 10, 10, 8, 8, 8});
+                tabla.setWidths(new int[]{3, 15, 15, 10, 10, 10, 8, 8, 8});
                 tabla.setWidthPercentage(100);
                 tabla.setHeaderRows(1);
 
@@ -157,6 +157,12 @@ public class ReportePqrs extends HttpServlet {
                 tabla.addCell(cell);
 
                 cell = new PdfPCell(new Phrase("Motivo", font_TH));
+                cell.setBackgroundColor(bg_TH);
+                cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+                cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                tabla.addCell(cell);
+
+                cell = new PdfPCell(new Phrase("Funcionario", font_TH));
                 cell.setBackgroundColor(bg_TH);
                 cell.setHorizontalAlignment(Element.ALIGN_CENTER);
                 cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
@@ -207,6 +213,10 @@ public class ReportePqrs extends HttpServlet {
                     cell.setBackgroundColor(bg_TD);
                     tabla.addCell(cell);
 
+                    cell = new PdfPCell(new Phrase(solicitud.getFuncionario().getNombreCompleto(), font_normal));
+                    cell.setBackgroundColor(bg_TD);
+                    tabla.addCell(cell);
+
                     cell = new PdfPCell(new Phrase(Utilidades.formatDate(solicitud.getFechaRegistro(), "yyyy-MM-dd HH:mm"), font_normal));
                     cell.setBackgroundColor(bg_TD);
                     tabla.addCell(cell);
@@ -225,7 +235,7 @@ public class ReportePqrs extends HttpServlet {
                     cell = new PdfPCell(new Phrase("Sin resultados", font_TH));
                     cell.setBackgroundColor(bg_TD);
                     cell.setMinimumHeight(20);
-                    cell.setColspan(8);
+                    cell.setColspan(9);
                     cell.setHorizontalAlignment(Element.ALIGN_CENTER);
                     cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
                     tabla.addCell(cell);
