@@ -1192,4 +1192,4 @@ INSERT INTO municipio (id,fk_departamento,codigo,nombre) VALUES (1118,18,'820','
 INSERT INTO municipio (id,fk_departamento,codigo,nombre) VALUES (1119,18,'871','VILLA CARO');
 INSERT INTO municipio (id,fk_departamento,codigo,nombre) VALUES (1120,18,'874','VILLA DEL ROSARIO');
 INSERT INTO funcionario(fk_tipo_identificacion, codigo_interno, identificacion, nombre_completo, cargo, celular, correo, contrasena, es_administrador, fecha_registro, fecha_modificacion, fecha_ultimo_ingreso)
-VALUES(8, 3, 1151704, '1093792354', 'OMAR RAMÓN MONTES.', 'Administrador', '3222430161', 'omarrm@ufps.edu.co', '20628d43f1b228b2d02d5e2ada747f1ec16eba1eed75532c1ac672943fdb9c07a4acf22991a72004a9f9acbeb3e073d2edda6324eb52749706cdad5a7c651d3b', true, '2020-12-02 18:07:51.071', '2020-12-02 18:18:02.689', NULL);
+VALUES(3, 1151704, '1093792354', 'OMAR RAMÓN MONTES.', 'Administrador', '3222430161', 'omarrm@ufps.edu.co', '20628d43f1b228b2d02d5e2ada747f1ec16eba1eed75532c1ac672943fdb9c07a4acf22991a72004a9f9acbeb3e073d2edda6324eb52749706cdad5a7c651d3b', true, '2020-12-02 18:07:51.071', '2020-12-02 18:18:02.689', NULL);
