@@ -61,9 +61,9 @@ public class FuncionarioDao extends RepositoryDao<FuncionarioDto, Integer> imple
     @Override
     public FuncionarioDto buscarDisponible() {
 
-        String query = String.format("select f.* from funcionario f \n"
-                + "left outer join solicitud s ON s.fk_funcionario = f.id \n"
-                + "where f.es_administrador = false and DATE(f.fecha_registro) = current_date \n"
+        String query = String.format("select f.* from funcionario f "
+                + "left outer join solicitud s ON (s.fk_funcionario = f.id and DATE(f.fecha_registro) = current_date) "
+                + "where f.es_administrador = false "
                 + "group by f.id order by count(s.id), f.id limit 1 ", getTableName());
 
         List<FuncionarioDto> listado = listDtoByQuery(query);
